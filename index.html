@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>acCordance — PI Planning L'Oréal R&I</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">acCordance</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Accueil</a>
+      <div class="nav-divider"></div>
+      <a href="decideurs.html">Décideurs</a>
+      <a href="orchestrateur.html">Orchestrateurs</a>
+      <a href="po-tech-lead.html">PO &amp; Tech Lead</a>
+      <a href="membre.html">Membres</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" id="themeToggle" title="Basculer le thème" aria-label="Basculer thème clair/sombre">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-brand">acCordance</div>
+  <p class="hero-tagline">Where teams find their rhythm.</p>
+  <p class="hero-desc">
+    La plateforme de pilotage PI Planning conçue pour L'Oréal R&amp;I —
+    un outil unique qui remplace Klaxoon, Excel et Confluence,
+    du setup jusqu'au bilan post-PI.
+  </p>
+
+  <div class="hero-badges">
+    <span class="hero-badge live">● Proto en production</span>
+    <span class="hero-badge">e-BeautyProduct · e-Excellence · E-Discovery</span>
+    <span class="hero-badge">4 personas</span>
+    <span class="hero-badge">37 écrans</span>
+    <span class="hero-badge">Supabase Realtime ⚡</span>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="decideurs.html" class="btn btn-outline btn-lg">⚖️ Décideurs</a>
+    <a href="orchestrateur.html" class="btn btn-outline btn-lg">🎼 Orchestrateurs</a>
+    <a href="po-tech-lead.html" class="btn btn-outline btn-lg">🎯 PO &amp; Tech Lead</a>
+    <a href="membre.html" class="btn btn-outline btn-lg">🎵 Membres</a>
+  </div>
+
+  <!-- Métriques clés -->
+  <div class="container">
+    <div class="status-bar">
+      <div class="status-item">
+        <div class="status-value">3</div>
+        <div class="status-label">Plateformes supportées</div>
+      </div>
+      <div class="status-item">
+        <div class="status-value">37</div>
+        <div class="status-label">Écrans implémentés</div>
+      </div>
+      <div class="status-item">
+        <div class="status-value">4</div>
+        <div class="status-label">Personas distincts</div>
+      </div>
+      <div class="status-item">
+        <div class="status-value">3</div>
+        <div class="status-label">Phases — Avant · Pendant · Après</div>
+      </div>
+      <div class="status-item">
+        <div class="status-value">100%</div>
+        <div class="status-label">Données réelles L'Oréal R&amp;I</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AVANT / APRÈS ═════════════════════════════════════════ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Le problème</span>
+      <h2 class="section-title">Aujourd'hui, 3 outils. Demain, un seul.</h2>
+      <p class="section-desc">Le PI Planning L'Oréal R&amp;I mobilise 100–150 personnes sur 2–3 jours. La coordination repose sur une pile d'outils non intégrés.</p>
+    </div>
+
+    <div class="before-after">
+      <div class="before-col">
+        <div class="ba-label">Aujourd'hui</div>
+        <h3>3 outils + des emails</h3>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-icon">❌</span><span><strong>Klaxoon</strong> — sessions live qui disparaissent après le PI. Aucune traçabilité.</span></div>
+          <div class="ba-item"><span class="ba-icon">❌</span><span><strong>Excel</strong> — 12 versions qui circulent, personne ne sait laquelle est la bonne.</span></div>
+          <div class="ba-item"><span class="ba-icon">❌</span><span><strong>Confluence</strong> — bilan rédigé 3 semaines après. Les données sont reconstituées de mémoire.</span></div>
+          <div class="ba-item"><span class="ba-icon">❌</span><span><strong>Emails</strong> — les dépendances inter-équipes se négocient par email et se perdent.</span></div>
+          <div class="ba-item"><span class="ba-icon">❌</span><span><strong>Zéro visibilité</strong> pour les décideurs pendant le PI. Le cockpit, c'est le tableau blanc.</span></div>
+        </div>
+      </div>
+
+      <div class="before-after-divider">
+        <div class="before-after-arrow">→</div>
+      </div>
+
+      <div class="after-col">
+        <div class="ba-label">Avec acCordance</div>
+        <h3>Un outil, tout le cycle</h3>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-icon">✅</span><span><strong>Wizard guidé</strong> — configuration du PI en 6 étapes, teams, agenda, participants.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span><strong>Jour J temps réel</strong> — check-in QR code, dashboard live, vote de confiance instantané.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span><strong>Breakout équipes</strong> — objectifs liés aux risques et aux dépendances, dans un seul écran.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span><strong>Bilan immédiat</strong> — roadmap, analytics et export disponibles dès la fin du PI.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span><strong>Cockpit décideur</strong> — scorecard équipes, risques agrégés, dépendances bloquantes en un coup d'œil.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GAINS ══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Les bénéfices</span>
+      <h2 class="section-title">Ce que ça change, concrètement</h2>
+    </div>
+
+    <div class="gains-grid">
+      <div class="gain-card">
+        <div class="gain-icon">🎯</div>
+        <h3>Un outil, pas trois</h3>
+        <p>Toute la vie du PI dans un seul endroit — du setup initial au bilan archivé. Fini les fichiers qui se perdent entre deux PIs.</p>
+      </div>
+      <div class="gain-card">
+        <div class="gain-icon">⚡</div>
+        <h3>Temps réel</h3>
+        <p>Check-in, votes et dashboard mis à jour instantanément via Supabase Realtime. Tout le monde voit la même information au même moment.</p>
+      </div>
+      <div class="gain-card">
+        <div class="gain-icon">🔗</div>
+        <h3>Tout est lié</h3>
+        <p>Objectifs connectés aux risques, aux dépendances et aux sprints. Une décision en cascade se voit immédiatement.</p>
+      </div>
+      <div class="gain-card">
+        <div class="gain-icon">👥</div>
+        <h3>Interface par rôle</h3>
+        <p>4 personas, 4 interfaces adaptées. Du cockpit décideur à la vue mobile du membre terrain — chacun voit ce dont il a besoin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PAIN POINTS — VERBATIMS ════════════════════════════════ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Ce qu'on entend</span>
+      <h2 class="section-title">Des frustrations que vous connaissez</h2>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-quote">
+        <q>Je passe 2 heures avant chaque PI à retrouver et fusionner les Excel des équipes. Chaque fois c'est la même galère.</q>
+        <cite>— Orchestrateur</cite>
+      </div>
+      <div class="pain-quote">
+        <q>Les dépendances inter-équipes, on les note sur Post-it pendant le breakout. Klaxoon les efface après la session.</q>
+        <cite>— Product Owner</cite>
+      </div>
+      <div class="pain-quote">
+        <q>Je reçois un lien Klaxoon le matin du PI. Je ne sais pas à quelle heure je dois voter, ni comment accéder à mon agenda.</q>
+        <cite>— Membre</cite>
+      </div>
+      <div class="pain-quote">
+        <q>En tant que Head of Platform, je n'ai aucune visibilité sur l'avancement des équipes avant le vote de confiance final.</q>
+        <cite>— Décideur</cite>
+      </div>
+      <div class="pain-quote">
+        <q>Le bilan PI sur Confluence ? Tout le monde l'écrit de mémoire 3 semaines après. Les données de risque sont perdues.</q>
+        <cite>— Contributeur</cite>
+      </div>
+      <div class="pain-quote">
+        <q>On a 20% de nos participants dans 2 équipes différentes. Impossible à gérer avec un seul outil — on finit par patcher à la main.</q>
+        <cite>— Orchestrateur</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LES 3 TEMPS ════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Le parcours produit</span>
+      <h2 class="section-title">3 temps, 1 outil</h2>
+      <p class="section-desc">acCordance couvre l'intégralité du cycle PI Planning — de la configuration initiale au bilan archivé.</p>
+    </div>
+
+    <div class="timeline">
+      <!-- AVANT -->
+      <div class="phase-card phase-avant">
+        <div class="phase-header">
+          <div class="phase-tag">AVANT</div>
+          <div class="phase-title">Setup &amp; Préparation</div>
+          <div class="phase-subtitle">J-4 semaines jusqu'à la veille du PI</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-items">
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Configuration du PI (identité, dates, thème, lieu)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Création et configuration des équipes</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Gestion des vœux de participation</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Import et validation des participants</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Configuration de l'agenda (vue 3 jours)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Publication &amp; envoi des magic links</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-connector">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- PENDANT -->
+      <div class="phase-card phase-pendant">
+        <div class="phase-header">
+          <div class="phase-tag">⚡ PENDANT</div>
+          <div class="phase-title">Jour J — En direct</div>
+          <div class="phase-subtitle">Multi-jours, temps réel, toutes équipes</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-items">
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Check-in participants (QR code ou manuel)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Dashboard opérationnel &amp; cockpit décideur</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Breakout équipes (objectifs, risques, dépendances)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Présentation plénière des objectifs (S27b)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Supervision ROAM Board (risques)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Vote de confiance (1–5 par équipe)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-connector">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- APRÈS -->
+      <div class="phase-card phase-apres">
+        <div class="phase-header">
+          <div class="phase-tag">APRÈS</div>
+          <div class="phase-title">Bilan &amp; Suivi</div>
+          <div class="phase-subtitle">Données disponibles dès la fin du PI</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-items">
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Bilan PI (roadmap, objectifs, risques, équipes)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Suivi post-PI des objectifs committed</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Analytics croisés (confiance, ROAM, charge)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Feedbacks participants (note + verbatim)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Export multi-format (PDF, Excel, JSON, PPTX)</span></div>
+            <div class="phase-item"><div class="phase-item-dot"></div><span>Archivage complet &amp; historique inter-PIs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PERSONAS ═══════════════════════════════════════════════ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Votre profil</span>
+      <h2 class="section-title">Qu'est-ce que ça change pour vous ?</h2>
+      <p class="section-desc">Choisissez votre profil pour découvrir les gains concrets, le flux dans acCordance et la stratégie d'adoption.</p>
+    </div>
+
+    <div class="persona-grid">
+      <a href="decideurs.html" class="persona-card persona-decideur">
+        <div class="persona-icon">⚖️</div>
+        <div class="persona-name">Décideurs</div>
+        <div class="persona-roles">Head of Chapter · Head of Platform</div>
+        <div class="persona-pain">"Pas de visibilité temps réel sur l'avancement des équipes pendant le PI."</div>
+        <div class="persona-gain">Cockpit de pilotage agrégé + plan de déploiement 3 plateformes + enjeux &amp; risques détaillés.</div>
+        <div class="persona-cta">Voir la section →</div>
+      </a>
+
+      <a href="orchestrateur.html" class="persona-card persona-orchestrateur">
+        <div class="persona-icon">🎼</div>
+        <div class="persona-name">Orchestrateurs</div>
+        <div class="persona-roles">Coach Produit · RTE · Contributeur Chapter</div>
+        <div class="persona-pain">"Je passe des heures à préparer le PI sur 3 outils qui ne se parlent pas."</div>
+        <div class="persona-gain">Wizard guidé 6 étapes + dashboard opérationnel complet + bilan automatisé.</div>
+        <div class="persona-cta">Voir la section →</div>
+      </a>
+
+      <a href="po-tech-lead.html" class="persona-card persona-po">
+        <div class="persona-icon">🎯</div>
+        <div class="persona-name">PO &amp; Tech Lead</div>
+        <div class="persona-roles">Product Owner · Product Lead · Tech Lead</div>
+        <div class="persona-pain">"Objectifs, risques et dépendances gérés sur Post-its — perdus après le PI."</div>
+        <div class="persona-gain">Espace de travail équipe complet : objectifs liés aux risques, dépendances trackées, présentation intégrée.</div>
+        <div class="persona-cta">Voir la section →</div>
+      </a>
+
+      <a href="membre.html" class="persona-card persona-membre">
+        <div class="persona-icon">🎵</div>
+        <div class="persona-name">Membres</div>
+        <div class="persona-roles">Développeur · Designer · PMO · BRM</div>
+        <div class="persona-pain">"Je reçois un lien Klaxoon le matin du PI, sans savoir à quelle heure voter."</div>
+        <div class="persona-gain">Magic link sans mot de passe, agenda personnel, vote en 1 clic, badge numérique.</div>
+        <div class="persona-cta">Voir la section →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ENJEUX & RISQUES ════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Transparence</span>
+      <h2 class="section-title">Enjeux &amp; points de vigilance</h2>
+      <p class="section-desc">On vous dit tout — et on a anticipé les réponses. Chaque risque identifié a une mitigation concrète.</p>
+    </div>
+
+    <div class="risks-grid">
+      <div class="risk-card risk-medium">
+        <div class="risk-level">⚠️ Point de vigilance</div>
+        <h4>Emails via domaine Brevo</h4>
+        <p>Les magic links sont envoyés depuis un domaine Brevo, pas depuis @loreal.com. Risque de filtrage spam ou défiance des destinataires.</p>
+        <div class="risk-mitigation">Plan : migration vers un domaine @loreal.com via SMTP custom avant déploiement officiel. Faisable en &lt; 1 semaine.</div>
+      </div>
+
+      <div class="risk-card risk-medium">
+        <div class="risk-level">⚠️ Point de vigilance</div>
+        <h4>Données hors EU (Supabase / Vercel)</h4>
+        <p>La base de données (Supabase) et l'hébergement (Vercel) sont des services cloud, potentiellement hors UE.</p>
+        <div class="risk-mitigation">RLS activé sur toutes les tables — aucun accès non authentifié possible. Migration vers Supabase EU ou Azure Static Apps faisable si requis par la DSI.</div>
+      </div>
+
+      <div class="risk-card risk-medium">
+        <div class="risk-level">⚠️ Point de vigilance</div>
+        <h4>Dépendance à un prestataire unique</h4>
+        <p>L'application est actuellement développée et maintenue par un seul prestataire externe (Naban TUO).</p>
+        <div class="risk-mitigation">Code source structuré et documenté (CLAUDE.md, user-flows.md, décisions.md). Plan de transfert de compétences à intégrer au contrat de déploiement.</div>
+      </div>
+
+      <div class="risk-card risk-low">
+        <div class="risk-level">✅ Géré</div>
+        <h4>Participants multi-équipes (~20%)</h4>
+        <p>Décideurs, coaches, UX et certains PO L'Oréal R&amp;I appartiennent à 2+ équipes simultanément.</p>
+        <div class="risk-mitigation">Architecture N:N implémentée (table participant_team_roles). Chaque participant vote et contribue pour chacune de ses équipes, avec TeamSwitcher intégré.</div>
+      </div>
+
+      <div class="risk-card risk-low">
+        <div class="risk-level">✅ Géré</div>
+        <h4>Adoption &amp; changement d'habitudes</h4>
+        <p>Risque de résistance au changement — 3 outils à désapprendre pour 100–150 personnes.</p>
+        <div class="risk-mitigation">Magic link sans mot de passe, wizard guidé 6 étapes, interface dédiée par rôle. Déploiement progressif : 1 plateforme pilote → généralisation.</div>
+      </div>
+
+      <div class="risk-card risk-low">
+        <div class="risk-level">✅ Géré</div>
+        <h4>Disponibilité le jour J</h4>
+        <p>Une panne le matin du PI bloquerait le check-in et le tableau de bord pour 100+ personnes.</p>
+        <div class="risk-mitigation">Vercel (SLA 99.99%) + Supabase (redondance cloud). Mode dégradé prévu : export papier des objectifs &amp; agenda depuis le bilan PDF la veille.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">acCordance</div>
+    <div class="footer-meta">
+      Proto en production · Juin 2026 · L'Oréal R&amp;I<br />
+      Développé par Naban TUO — consultant Product Management &amp; Agile
+    </div>
+    <div class="footer-contact">
+      naban.tuo@gmail.com
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Dark mode toggle
+  const toggle = document.getElementById('themeToggle');
+  const html   = document.documentElement;
+
+  const saved = localStorage.getItem('accordance-theme');
+  if (saved) {
+    html.setAttribute('data-theme', saved);
+    toggle.textContent = saved === 'dark' ? '☀️' : '🌙';
+  }
+
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const next   = isDark ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('accordance-theme', next);
+  });
+</script>
+
+</body>
+</html>
