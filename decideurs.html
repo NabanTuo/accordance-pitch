@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Décideurs — acCordance · PI Planning L'Oréal R&I</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Styles spécifiques Décideurs ────────────────────────── */
+
+    /* Hero persona */
+    .persona-hero {
+      padding: 64px 28px 56px;
+      background: linear-gradient(135deg, var(--purple-1) 0%, var(--bg-base) 60%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .persona-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .persona-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tertiary-text);
+      background: var(--tertiary-bg);
+      border: 1px solid var(--purple-2);
+      border-radius: var(--radius-pill);
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .persona-hero-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .persona-hero-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 32px;
+    }
+    .persona-hero-roles {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .role-chip {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--purple-2);
+      color: var(--tertiary-text);
+    }
+
+    /* Pain points — citation style fort */
+    .pain-strong {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .pain-strong-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--brand-purple);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .pain-strong-card q {
+      display: block;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.65;
+      margin-bottom: 12px;
+      quotes: "«\00a0" "\00a0»";
+    }
+    .pain-strong-card cite {
+      font-size: 12px;
+      font-weight: 700;
+      font-style: normal;
+      color: var(--tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Gains — feature cards avec accent */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .feature-card {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      align-items: start;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .feature-card:hover { box-shadow: var(--shadow-md); }
+    .feature-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--tertiary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .feature-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .feature-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .feature-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-bg);
+      color: var(--primary-text);
+      margin-top: 8px;
+    }
+
+    /* Déploiement — stepper */
+    .deploy-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+    .deploy-steps::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--brand-purple), var(--brand-blue), var(--success));
+    }
+    .deploy-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 0 0 32px 0;
+      position: relative;
+    }
+    .deploy-step:last-child { padding-bottom: 0; }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow-md);
+    }
+    .step-1 .step-num { background: var(--brand-purple); }
+    .step-2 .step-num { background: var(--brand-blue); }
+    .step-3 .step-num { background: var(--success); }
+
+    .step-body {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .step-1 .step-label { color: var(--tertiary); }
+    .step-2 .step-label { color: var(--primary); }
+    .step-3 .step-label { color: var(--success-text); }
+
+    .step-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .step-body p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .step-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .step-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+    .step-check-icon { flex-shrink: 0; font-size: 14px; }
+
+    /* Roadmap — 2 colonnes livré vs à venir */
+    .roadmap-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .roadmap-col {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .roadmap-col-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      line-height: 1.5;
+    }
+    .roadmap-item:last-child { border-bottom: none; }
+
+    /* Prochaines étapes */
+    .next-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .next-step-card {
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .next-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--grad-h);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .next-step-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+    .next-step-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CTA bloc */
+    .cta-block {
+      background: linear-gradient(135deg, var(--primary-bg), var(--tertiary-bg));
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      text-align: center;
+    }
+    .cta-block h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .cta-block p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 768px) {
+      .pain-strong   { grid-template-columns: 1fr; }
+      .roadmap-split { grid-template-columns: 1fr; }
+      .next-steps-grid { grid-template-columns: 1fr; }
+      .feature-card  { grid-template-columns: 1fr; }
+      .deploy-steps::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">acCordance</a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <div class="nav-divider"></div>
+      <a href="decideurs.html" class="active">Décideurs</a>
+      <a href="orchestrateur.html">Orchestrateurs</a>
+      <a href="po-tech-lead.html">PO &amp; Tech Lead</a>
+      <a href="membre.html">Membres</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-theme" id="themeToggle" title="Basculer le thème" aria-label="Basculer thème clair/sombre">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="persona-hero">
+  <div class="persona-hero-inner">
+    <div class="persona-hero-tag">⚖️ Pour les décideurs</div>
+    <h1 class="persona-hero-title">Vous méritez un cockpit,<br/>pas un vote surprise en fin de journée.</h1>
+    <p class="persona-hero-desc">
+      Aujourd'hui, votre visibilité sur le PI Planning se résume au vote de confiance final.
+      acCordance vous donne un tableau de bord agrégé en temps réel — et un plan de déploiement
+      structuré pour les 3 plateformes L'Oréal R&amp;I.
+    </p>
+    <div class="persona-hero-roles">
+      <span class="role-chip">Head of Chapter</span>
+      <span class="role-chip">Head of Platform</span>
+      <span class="role-chip">Management R&amp;I</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PAIN POINTS ════════════════════════════════════════════ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Ce que vous vivez</span>
+      <h2 class="section-title">Des angles morts qui coûtent cher</h2>
+      <p class="section-desc">Sans outil dédié, la visibilité décideur dépend du bon vouloir des comptes-rendus — et de la mémoire des équipes.</p>
+    </div>
+
+    <div class="pain-strong">
+      <div class="pain-strong-card">
+        <q>J'apprends les risques majeurs de mes équipes le soir du vote de confiance. À ce stade, il est trop tard pour agir sur le PI.</q>
+        <cite>Head of Platform</cite>
+      </div>
+      <div class="pain-strong-card">
+        <q>Le bilan PI est rédigé 3 semaines après sur Confluence. Les scores de confiance et le ROAM sont reconstituées de mémoire — les données ne sont plus fiables.</q>
+        <cite>Head of Chapter</cite>
+      </div>
+      <div class="pain-strong-card">
+        <q>Je n'ai aucun moyen de comparer les équipes entre elles pendant le PI. Je découvre les dépendances bloquantes en plénière.</q>
+        <cite>Head of Platform</cite>
+      </div>
+      <div class="pain-strong-card">
+        <q>En tant que décideur, je valide des objectifs sans avoir de vue sur la charge réelle des équipes ni sur le taux de risques non traités.</q>
+        <cite>Management R&amp;I</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CE QUE ÇA CHANGE ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Votre expérience dans acCordance</span>
+      <h2 class="section-title">De spectateur à pilote</h2>
+      <p class="section-desc">Trois écrans conçus pour vous — accessibles depuis votre téléphone ou votre laptop pendant le PI.</p>
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📊</div>
+        <div class="feature-content">
+          <h3>Cockpit de pilotage — Dashboard S11 "Pilotage"</h3>
+          <p>Un onglet dédié dans le dashboard : scorecard de toutes les équipes triée par risque composite (feu tricolore santé), confiance moyenne, risques à traiter, dépendances bloquantes, charge committed vs uncommitted. Drill-down en un clic : mini-grille objectifs × sprints + liste ROAM + dépendances de chaque équipe. Lecture seule — vous observez sans interférer.</p>
+          <span class="feature-tag">⚡ Temps réel · Supabase</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap">🗳️</div>
+        <div class="feature-content">
+          <h3>Vote de confiance — S46 &amp; S28</h3>
+          <p>Chaque participant vote 1–5 pour chaque équipe depuis son téléphone via magic link. Les résultats s'agrègent instantanément dans S28 (vue supervision). Les équipes avec un score ≤ 3 sont mises en évidence — vous savez exactement où concentrer la conversation post-vote. Aucun dépouillement manuel.</p>
+          <span class="feature-tag">⚡ Realtime · résultats instantanés</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📋</div>
+        <div class="feature-content">
+          <h3>Breakout en lecture — S27 mode décideur</h3>
+          <p>Accès en lecture seule au breakout de toutes les équipes que vous suivez. Vous voyez les objectifs committed/uncommitted, les risques ROAM, les dépendances entrantes et sortantes — pendant que les équipes travaillent. Aucune intervention, mais une conscience permanente de ce qui se construit.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📈</div>
+        <div class="feature-content">
+          <h3>Bilan &amp; analytics — S17, S40</h3>
+          <p>Dès la fin du PI, les données sont disponibles : roadmap sprint × équipe, ROAM agrégé, score de confiance par équipe, taux committed/uncommitted, export PDF et Excel. Plus de Confluence rédigé de mémoire — les données sont capturées en direct pendant le PI.</p>
+          <span class="feature-tag">Bilan disponible immédiatement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PLAN DE DÉPLOIEMENT ════════════════════════════════════ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Stratégie</span>
+      <h2 class="section-title">Plan de déploiement — 3 plateformes</h2>
+      <p class="section-desc">Un déploiement progressif pour maîtriser l'adoption et ajuster avant la généralisation.</p>
+    </div>
+
+    <div class="deploy-steps">
+      <!-- Phase 1 -->
+      <div class="deploy-step step-1">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-label">Phase Pilote — PI #1</div>
+          <h3>1 plateforme · Adoption contrôlée</h3>
+          <p>Déploiement sur une plateforme volontaire (ex : e-BeautyProduct). Toutes les équipes de la plateforme, sur 1 PI complet. L'orchestrateur est accompagné par le prestataire. Retours recueillis via S41 Feedback intégré.</p>
+          <div class="step-checklist">
+            <div class="step-check"><span class="step-check-icon">□</span><span>Choisir la plateforme pilote</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Valider le plan SMTP (@loreal.com)</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Former l'orchestrateur (2h)</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Onboarding PO/TL (30 min par équipe)</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Membres : magic link, 0 formation</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="deploy-step step-2">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-label">Phase Extension — PI #2</div>
+          <h3>2 plateformes · Retours intégrés</h3>
+          <p>Extension à une 2e plateforme. Les retours du PI pilote sont intégrés (UX, pain points opérationnels). L'orchestrateur de la phase 1 peut co-former celui de la phase 2. Décision : continuer avec la 3e plateforme ou itérer.</p>
+          <div class="step-checklist">
+            <div class="step-check"><span class="step-check-icon">□</span><span>Analyser les feedbacks S41 du PI pilote</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Ajustements produit si nécessaires</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Onboarding 2e orchestrateur par le 1er</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Valider la stratégie de transfert de compétences</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="deploy-step step-3">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-label">Phase Généralisation — PI #3+</div>
+          <h3>3 plateformes · Déploiement complet</h3>
+          <p>Les 3 plateformes (e-BeautyProduct · e-Excellence · E-Discovery) utilisent acCordance. Le cockpit décideur agrège les données des 3 plateformes simultanément. La dépendance au prestataire est réduite par la montée en compétences interne.</p>
+          <div class="step-checklist">
+            <div class="step-check"><span class="step-check-icon">□</span><span>Déploiement 3e plateforme</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Vue multi-plateformes dans S11 Dashboard</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Transfert de compétences formalisé</span></div>
+            <div class="step-check"><span class="step-check-icon">□</span><span>Intégration ServiceNow (v2 — si validée)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ROADMAP & CONFIANCE ════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Maturité du produit</span>
+      <h2 class="section-title">Ce qui est livré. Ce qui vient.</h2>
+      <p class="section-desc">acCordance n'est pas une maquette — c'est un proto en production avec de vraies données L'Oréal R&amp;I.</p>
+    </div>
+
+    <div class="roadmap-split">
+      <div class="roadmap-col">
+        <div class="roadmap-col-title">
+          <span style="font-size:18px">✅</span>
+          <span style="color: var(--success-text)">Livré &amp; en production</span>
+        </div>
+        <div class="roadmap-item"><span>✅</span><span>Wizard setup complet (6 étapes : identité, équipes, vœux, participants, agenda, publication)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Dashboard opérationnel + Cockpit décideur (S11 — 2 onglets)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Breakout équipes — objectifs, risques, dépendances, roadmap (S27 — 4 onglets)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Check-in QR code avec métriques temps réel (S10)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>ROAM Board (kanban + liste) — drag &amp; drop P1 (S13)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Vote de confiance + supervision temps réel (S46 + S28)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Bilan PI — roadmap, objectifs, risques, analytics (S17 + S40)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Export multi-format (PDF, Excel, JSON, PPTX)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Architecture N:N (participants multi-équipes)</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Auth magic link + OTP — 0 mot de passe</span></div>
+        <div class="roadmap-item"><span>✅</span><span>Dark mode + responsive mobile partiel</span></div>
+      </div>
+
+      <div class="roadmap-col">
+        <div class="roadmap-col-title">
+          <span style="font-size:18px">🔜</span>
+          <span style="color: var(--text-secondary)">Roadmap v2</span>
+        </div>
+        <div class="roadmap-item"><span>🔜</span><span>Passe responsive mobile complète (priorité membres → décideurs)</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>SMTP domaine @loreal.com (avant déploiement officiel)</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>Hébergement EU (Supabase EU ou on-premise si requis DSI)</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>Intégration ServiceNow — objectifs liés aux epics (base posée : champ external_ref)</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>Notifications Teams (vérification restrictions IT L'Oréal)</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>Export "Digital Bench" — roadmap A0 SVG/PDF</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>Suivi présence multi-jours (table check_ins dédiée)</span></div>
+        <div class="roadmap-item"><span>🔜</span><span>Plan de transfert de compétences formalisé</span></div>
+      </div>
+    </div>
+
+    <!-- Garanties techniques -->
+    <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; text-align: center;">
+        <div style="font-size: 24px; margin-bottom: 8px;">🔒</div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Sécurité RLS</div>
+        <div style="font-size: 13px; color: var(--text-secondary);">Row Level Security activé sur toutes les tables Supabase — aucun accès non authentifié possible.</div>
+      </div>
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; text-align: center;">
+        <div style="font-size: 24px; margin-bottom: 8px;">🚀</div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Pipeline CD Vercel</div>
+        <div style="font-size: 13px; color: var(--text-secondary);">Déploiement automatique à chaque commit. SLA Vercel 99.99%. Hash de build affiché dans l'app.</div>
+      </div>
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; text-align: center;">
+        <div style="font-size: 24px; margin-bottom: 8px;">📄</div>
+        <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Code documenté</div>
+        <div style="font-size: 13px; color: var(--text-secondary);">CLAUDE.md, user-flows.md, décisions.md — chaque choix technique est tracé et justifié.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCHAINES ÉTAPES ══════════════════════════════════════ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Pour démarrer</span>
+      <h2 class="section-title">4 décisions à prendre</h2>
+      <p class="section-desc">Ces 4 points débloquent le déploiement de la phase pilote.</p>
+    </div>
+
+    <div class="next-steps-grid">
+      <div class="next-step-card">
+        <div class="next-step-num">1</div>
+        <div>
+          <h4>Choisir la plateforme pilote</h4>
+          <p>Quelle plateforme (eBP · eEx · eDi) veut être la première ? Le pilote nécessite un orchestrateur motivé et un PI planifié dans les 2 mois.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <div class="next-step-num">2</div>
+        <div>
+          <h4>Valider le plan email</h4>
+          <p>Les magic links partent actuellement depuis Brevo. La migration vers un domaine @loreal.com demande une validation IT — délai estimé 1 semaine.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <div class="next-step-num">3</div>
+        <div>
+          <h4>Cadrer l'hébergement</h4>
+          <p>Supabase cloud + Vercel aujourd'hui. Si la DSI requiert un hébergement EU ou on-premise, prévoir 4–6 semaines de migration avant le pilote.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <div class="next-step-num">4</div>
+        <div>
+          <h4>Formaliser le transfert</h4>
+          <p>Un plan de transfert de compétences (documentation, formation équipe interne) doit être intégré au contrat prestataire avant le déploiement complet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h3>Prêt à lancer le pilote ?</h3>
+      <p>Une session de 2h suffit pour configurer le premier PI Planning dans acCordance et former l'orchestrateur de la plateforme pilote.</p>
+      <div class="cta-actions">
+        <a href="mailto:naban.tuo@gmail.com?subject=acCordance — Déploiement pilote" class="btn btn-primary btn-lg">Contacter Naban TUO →</a>
+        <a href="index.html" class="btn btn-outline btn-lg">← Retour à l'accueil</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">acCordance</div>
+    <div class="footer-meta">
+      Proto en production · Juin 2026 · L'Oréal R&amp;I<br/>
+      Développé par Naban TUO — consultant Product Management &amp; Agile
+    </div>
+    <div class="footer-contact">naban.tuo@gmail.com</div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const html   = document.documentElement;
+  const saved  = localStorage.getItem('accordance-theme');
+  if (saved) { html.setAttribute('data-theme', saved); toggle.textContent = saved === 'dark' ? '☀️' : '🌙'; }
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('accordance-theme', next);
+  });
+</script>
+
+</body>
+</html>
