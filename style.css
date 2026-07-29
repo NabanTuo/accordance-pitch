@@ -339,7 +339,8 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-ctas .btn {
-  width: 210px;
+  min-width: 210px;
+  width: auto;
   justify-content: center;
 }
 
