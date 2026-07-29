@@ -1,5 +1,5 @@
 /* ============================================================
-   acCordance — Pitch Site · style.css
+   acCordance - Pitch Site · style.css
    Basé sur tokens.css (design tokens L'Oréal R&I)
    ============================================================ */
 
@@ -260,6 +260,11 @@ img { max-width: 100%; display: block; }
   gap: 10px;
   justify-content: center;
   margin-bottom: 16px;
+}
+
+.hero-ctas .btn {
+  width: 210px;
+  justify-content: center;
 }
 
 /* ── Before / After ───────────────────────────────────────── */
@@ -795,7 +800,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   Persona Tabs — sélecteur unique (remplace les 4 pages séparées)
+   Persona Tabs - sélecteur unique (remplace les 4 pages séparées)
    ============================================================ */
 .role-chip {
   font-size: 13px;
@@ -896,7 +901,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   Blueprint — vue élargie optionnelle (repliée par défaut)
+   Blueprint - vue élargie optionnelle (repliée par défaut)
    ============================================================ */
 .blueprint-toggle {
   display: flex;
@@ -998,4 +1003,114 @@ img { max-width: 100%; display: block; }
   color: var(--text-tertiary);
   font-style: italic;
   line-height: 1.55;
+}
+
+/* ============================================================
+   ServiceNow - panneau pain point (section Le problème)
+   ============================================================ */
+.sn-panel-header { text-align: center; margin: 64px 0 28px; }
+.sn-panel-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+.sn-panel-desc { font-size: 15px; color: var(--text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+.sn-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 16px;
+  gap: 14px;
+  background: var(--bg-base);
+  border-top: 1.5px solid var(--border);
+  border-bottom: 1.5px solid var(--border);
+}
+
+/* Fond blanc fixe volontaire : le logo ServiceNow importé porte ses propres
+   couleurs de marque (#293e40 / #81b5a1) et doit rester lisible quel que soit
+   le thème de la page - même exception que les badges plateforme (voir CLAUDE.md). */
+.sn-logo-badge {
+  flex-shrink: 0;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sn-logo-badge img { width: 84px; height: auto; display: block; }
+
+.sn-logo-accordance { background: var(--bg-elevated); }
+.sn-logo-accordance span {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--grad-h);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+.sn-flow {
+  position: relative;
+  width: 2px;
+  flex: 1;
+  min-height: 70px;
+  background: linear-gradient(180deg, #81b5a1, var(--brand-cyan));
+  opacity: 0.3;
+  border-radius: 2px;
+}
+.sn-flow-dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  transform: translateX(-50%);
+  box-shadow: 0 0 6px var(--brand-blue);
+  opacity: 0;
+  animation: sn-flow-move-v 2.6s ease-in-out infinite;
+}
+.sn-flow-dot:nth-child(2) { animation-delay: 0.87s; background: #81b5a1; box-shadow: 0 0 6px #81b5a1; }
+.sn-flow-dot:nth-child(3) { animation-delay: 1.74s; }
+
+@keyframes sn-flow-move-v {
+  0%   { top: 0%;   opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes sn-flow-move-h {
+  0%   { left: 0%;   opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@media (max-width: 680px) {
+  .sn-divider {
+    flex-direction: row;
+    padding: 16px;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1.5px solid var(--border);
+    border-right: 1.5px solid var(--border);
+  }
+  .sn-flow {
+    width: auto;
+    height: 2px;
+    flex: 1;
+    min-height: 0;
+    min-width: 40px;
+    background: linear-gradient(90deg, #81b5a1, var(--brand-cyan));
+  }
+  .sn-flow-dot {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    animation-name: sn-flow-move-h;
+  }
 }
