@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="tokens.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body id="top">
+<body>
 
 <!-- ══ NAV ══════════════════════════════════════════════════ -->
 <nav class="site-nav">
@@ -18,7 +18,7 @@
       <div class="nav-divider"></div>
       <a href="#parcours">Le parcours</a>
       <a href="#personas">Votre profil</a>
-      <a href="#blueprint">Vision élargie</a>
+      <a href="#blueprint">Carte de flow</a>
     </div>
     <div class="nav-actions">
       <button class="btn-theme" id="themeToggle" title="Basculer le thème" aria-label="Basculer thème clair/sombre"></button>
@@ -26,8 +26,23 @@
   </div>
 </nav>
 
-<!-- ══ HERO ══════════════════════════════════════════════════ -->
-<section class="hero">
+<!-- ══ RAIL DE SLIDES ══════════════════════════════════════════ -->
+<nav class="slide-dots" aria-label="Navigation des slides">
+  <a href="#top" class="slide-dot" data-dot title="Accueil"></a>
+  <a href="#probleme" class="slide-dot" data-dot title="Le problème"></a>
+  <a href="#servicenow" class="slide-dot" data-dot title="ServiceNow"></a>
+  <a href="#parcours" class="slide-dot" data-dot title="Le parcours"></a>
+  <a href="#benefices" class="slide-dot" data-dot title="Les bénéfices"></a>
+  <a href="#personas" class="slide-dot" data-dot title="Votre profil"></a>
+  <a href="#persona-decideur" class="slide-dot" data-dot title="Décideurs"></a>
+  <a href="#persona-orchestrateur" class="slide-dot" data-dot title="Orchestrateurs"></a>
+  <a href="#persona-popl" class="slide-dot" data-dot title="PO &amp; PL"></a>
+  <a href="#persona-membre" class="slide-dot" data-dot title="Membres"></a>
+  <a href="#blueprint" class="slide-dot" data-dot title="Carte de flow"></a>
+</nav>
+
+<!-- ══ SLIDE 1 · HERO ══════════════════════════════════════════ -->
+<section class="hero slide" id="top">
   <span class="section-eyebrow">🔧 Prototype fonctionnel · L'Oréal R&amp;I</span>
   <div class="hero-brand">acCordance</div>
   <p class="hero-tagline">Where teams find their rhythm.</p>
@@ -38,10 +53,10 @@
   </p>
 
   <div class="hero-ctas">
-    <button class="btn btn-outline btn-lg" data-jump-tab="decideur">⚖️ Décideurs</button>
-    <button class="btn btn-outline btn-lg" data-jump-tab="orchestrateur">🎼 Orchestrateurs</button>
-    <button class="btn btn-outline btn-lg" data-jump-tab="popl">🎯 PO &amp; PL</button>
-    <button class="btn btn-outline btn-lg" data-jump-tab="membre">🎵 Membres</button>
+    <a href="#persona-decideur" class="btn btn-outline btn-lg">⚖️ Décideurs</a>
+    <a href="#persona-orchestrateur" class="btn btn-outline btn-lg">🎼 Orchestrateurs</a>
+    <a href="#persona-popl" class="btn btn-outline btn-lg">🎯 PO &amp; PL</a>
+    <a href="#persona-membre" class="btn btn-outline btn-lg">🎵 Membres</a>
   </div>
 
   <div class="container">
@@ -64,10 +79,15 @@
       </div>
     </div>
   </div>
+
+  <a href="#probleme" class="slide-hint" aria-label="Slide suivante">
+    <span>Défiler</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
 </section>
 
-<!-- ══ LE PROBLÈME ══════════════════════════════════════════ -->
-<section class="section section--alt" id="probleme">
+<!-- ══ SLIDE 2 · LE PROBLÈME ═══════════════════════════════════ -->
+<section class="section section--alt slide" id="probleme">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">Le problème</span>
@@ -102,7 +122,12 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- ══ SLIDE 3 · SERVICENOW ════════════════════════════════════ -->
+<section class="section slide" id="servicenow">
+  <div class="container">
     <div class="sn-panel-header">
       <span class="section-eyebrow">Le pain point n°1</span>
       <h3 class="sn-panel-title">Le lien avec ServiceNow</h3>
@@ -145,8 +170,8 @@
   </div>
 </section>
 
-<!-- ══ LE PARCOURS - 3 TEMPS ═══════════════════════════════════ -->
-<section class="section" id="parcours">
+<!-- ══ SLIDE 4 · LE PARCOURS - 3 TEMPS ═══════════════════════════ -->
+<section class="section section--alt slide" id="parcours">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">Le parcours produit</span>
@@ -221,8 +246,8 @@
   </div>
 </section>
 
-<!-- ══ GAINS ══════════════════════════════════════════════════ -->
-<section class="section section--alt">
+<!-- ══ SLIDE 5 · GAINS ══════════════════════════════════════════ -->
+<section class="section slide" id="benefices">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">Les bénéfices</span>
@@ -254,166 +279,198 @@
   </div>
 </section>
 
-<!-- ══ VOTRE PROFIL - ONGLETS PERSONA ═══════════════════════════ -->
-<section class="section section--alt" id="personas">
+<!-- ══ SLIDE 6 · VOTRE PROFIL (DIVIDER) ════════════════════════ -->
+<section class="section section--alt slide" id="personas">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">Votre profil</span>
       <h2 class="section-title">Quatre rôles, une seule app</h2>
-      <p class="section-desc">Ce qui change concrètement pour vous, selon votre rôle dans le PI Planning.</p>
+      <p class="section-desc">Ce qui change concrètement pour vous, selon votre rôle dans le PI Planning. Choisissez votre profil.</p>
     </div>
 
-    <div class="tab-nav" role="tablist">
-      <button class="tab-btn active" data-tab="decideur" role="tab" aria-selected="true">⚖️ Décideurs</button>
-      <button class="tab-btn" data-tab="orchestrateur" role="tab" aria-selected="false">🎼 Orchestrateurs &amp; Contributeurs</button>
-      <button class="tab-btn" data-tab="popl" role="tab" aria-selected="false">🎯 PO &amp; Product Tech Lead</button>
-      <button class="tab-btn" data-tab="membre" role="tab" aria-selected="false">🎵 Membres</button>
-    </div>
-
-    <div class="tab-panels">
-
-      <!-- ── DÉCIDEUR ────────────────────────────────────────── -->
-      <div class="tab-panel active panel-decideur" id="panel-decideur">
-        <div class="panel-head">
-          <div class="panel-head-icon">⚖️</div>
-          <div class="panel-head-body">
-            <h3>De spectateur à pilote</h3>
-            <p>Aujourd'hui, votre visibilité sur le PI se résume au vote de confiance final. acCordance vous donne un cockpit agrégé, en temps réel, sans interférer avec le travail des équipes.</p>
-            <div class="panel-head-roles">
-              <span class="role-chip">Head of Chapter</span>
-              <span class="role-chip">Head of Platform</span>
-              <span class="role-chip">Management R&amp;I</span>
-            </div>
-          </div>
-        </div>
-        <div class="panel-cols">
-          <div>
-            <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
-            <div class="panel-quotes">
-              <div class="pain-quote"><q>J'apprends les risques majeurs de mes équipes le soir du vote de confiance. À ce stade, il est trop tard pour agir.</q><cite>- Head of Platform</cite></div>
-              <div class="pain-quote"><q>Je découvre les dépendances bloquantes en plénière - jamais avant.</q><cite>- Head of Chapter</cite></div>
-            </div>
-          </div>
-          <div>
-            <div class="panel-col-label">Ce que ça change</div>
-            <div class="ba-items">
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Cockpit agrégé : scorecard de toutes vos équipes, risque composite, dépendances bloquantes - en lecture seule.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Vote de confiance : résultats agrégés en direct, aucun dépouillement manuel.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Drill-down équipe : objectifs, risques, dépendances - sans interrompre le breakout.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Bilan disponible dès la fin du PI - plus de reconstruction a posteriori.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ORCHESTRATEUR & CONTRIBUTEUR ────────────────────── -->
-      <div class="tab-panel panel-orchestrateur" id="panel-orchestrateur">
-        <div class="panel-head">
-          <div class="panel-head-icon">🎼</div>
-          <div class="panel-head-body">
-            <h3>Un seul cockpit pour tout le PI</h3>
-            <p>Setup, publication, coordination du jour J, vote, bilan - aujourd'hui répartis dans plusieurs outils qui ne se parlent pas. acCordance réunit tout dans un flux continu.</p>
-            <div class="panel-head-roles">
-              <span class="role-chip">Orchestrateur</span>
-              <span class="role-chip">Contributeur</span>
-              <span class="role-chip">Agile Coach</span>
-            </div>
-          </div>
-        </div>
-        <div class="panel-cols">
-          <div>
-            <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
-            <div class="panel-quotes">
-              <div class="pain-quote"><q>Je configure le PI dans Excel, Confluence, Klaxoon et Teams. À chaque changement de date, je resynchronise les quatre à la main.</q><cite>- Orchestrateur</cite></div>
-              <div class="pain-quote"><q>Pendant le breakout, zéro visibilité sur l'avancement des équipes. Je cours de table en table.</q><cite>- Orchestrateur</cite></div>
-            </div>
-          </div>
-          <div>
-            <div class="panel-col-label">Ce que ça change</div>
-            <div class="ba-items">
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Wizard de configuration guidé (dates, équipes, agenda, plateformes) - sauvegarde automatique.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Publication → magic links envoyés automatiquement, plus d'invitations manuelles une à une.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Dashboard live + supervision des risques et dépendances cross-équipes pendant le PI.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Bilan généré automatiquement en fin de PI - plus de consolidation manuelle équipe par équipe.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── PO & PL ──────────────────────────────────────────── -->
-      <div class="tab-panel panel-popl" id="panel-popl">
-        <div class="panel-head">
-          <div class="panel-head-icon">🎯</div>
-          <div class="panel-head-body">
-            <h3>Un espace de travail d'équipe, pas un Excel</h3>
-            <p>Objectifs, risques, dépendances - aujourd'hui dispersés entre Excel, Post-its et emails. acCordance centralise tout dans un seul espace, du breakout à la plénière.</p>
-            <div class="panel-head-roles">
-              <span class="role-chip">Product Owner</span>
-              <span class="role-chip">Product Tech Lead</span>
-            </div>
-          </div>
-        </div>
-        <div class="panel-cols">
-          <div>
-            <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
-            <div class="panel-quotes">
-              <div class="pain-quote"><q>On gère les objectifs sur Excel, les risques sur Post-it, les dépendances par email. Rien n'est lié.</q><cite>- Product Owner</cite></div>
-              <div class="pain-quote"><q>Je ne sais pas quelles dépendances sont bloquantes pour nous avant la plénière. Trop tard pour renégocier.</q><cite>- Product Tech Lead</cite></div>
-            </div>
-          </div>
-          <div>
-            <div class="panel-col-label">Ce que ça change</div>
-            <div class="ba-items">
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Un espace de travail d'équipe : objectifs, risques, dépendances - tous reliés entre eux.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Import depuis Excel par simple copier-coller.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Présentation plénière générée depuis vos objectifs - sans PowerPoint refait la veille à minuit.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Multi-équipes géré nativement pour les PO qui portent plusieurs équipes.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MEMBRE ───────────────────────────────────────────── -->
-      <div class="tab-panel panel-membre" id="panel-membre">
-        <div class="panel-head">
-          <div class="panel-head-icon">🎵</div>
-          <div class="panel-head-body">
-            <h3>Votre PI en 3 gestes simples</h3>
-            <p>Pas de compte à créer, pas de formation. Un lien dans votre boîte mail, et vous êtes prêt à suivre l'agenda, contribuer et voter.</p>
-            <div class="panel-head-roles">
-              <span class="role-chip">Développeur</span>
-              <span class="role-chip">Designer</span>
-              <span class="role-chip">PMO</span>
-              <span class="role-chip">BRM</span>
-            </div>
-          </div>
-        </div>
-        <div class="panel-cols">
-          <div>
-            <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
-            <div class="panel-quotes">
-              <div class="pain-quote"><q>Je reçois un lien le matin du PI, sans savoir à quelle heure voter ni où trouver mon agenda.</q><cite>- Membre</cite></div>
-              <div class="pain-quote"><q>Les objectifs de l'équipe, je les découvre en plénière. Trop tard pour donner un vrai avis.</q><cite>- Membre</cite></div>
-            </div>
-          </div>
-          <div>
-            <div class="panel-col-label">Ce que ça change</div>
-            <div class="ba-items">
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Agenda en direct : où vous devez être, mis à jour automatiquement si une session est décalée.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Contribution aux objectifs, risques et dépendances de votre équipe, en temps réel avec vos collègues.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Vote de confiance en un geste, depuis votre téléphone.</span></div>
-              <div class="ba-item"><span class="ba-icon">✅</span><span>Vos décisions restent accessibles après le PI - plus de compte-rendu introuvable.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="persona-switch">
+      <a href="#persona-decideur" class="persona-switch-item" data-persona="decideur">⚖️ Décideurs</a>
+      <a href="#persona-orchestrateur" class="persona-switch-item" data-persona="orchestrateur">🎼 Orchestrateurs &amp; Contributeurs</a>
+      <a href="#persona-popl" class="persona-switch-item" data-persona="popl">🎯 PO &amp; Product Tech Lead</a>
+      <a href="#persona-membre" class="persona-switch-item" data-persona="membre">🎵 Membres</a>
     </div>
   </div>
 </section>
 
-<!-- ══ VISION ÉLARGIE - CARTE DE FLOW (LIEN EXTERNE) ═══════════════ -->
-<section class="section" id="blueprint">
+<!-- ══ SLIDE 7 · DÉCIDEUR ═══════════════════════════════════════ -->
+<section class="section slide panel-decideur" id="persona-decideur">
+  <div class="container">
+    <div class="persona-switch">
+      <a href="#persona-decideur" class="persona-switch-item is-current" data-persona="decideur">⚖️ Décideurs</a>
+      <a href="#persona-orchestrateur" class="persona-switch-item" data-persona="orchestrateur">🎼 Orchestrateurs &amp; Contributeurs</a>
+      <a href="#persona-popl" class="persona-switch-item" data-persona="popl">🎯 PO &amp; Product Tech Lead</a>
+      <a href="#persona-membre" class="persona-switch-item" data-persona="membre">🎵 Membres</a>
+    </div>
+
+    <div class="panel-head">
+      <div class="panel-head-icon">⚖️</div>
+      <div class="panel-head-body">
+        <h3>De spectateur à pilote</h3>
+        <p>Aujourd'hui, votre visibilité sur le PI se résume au vote de confiance final. acCordance vous donne un cockpit agrégé, en temps réel, sans interférer avec le travail des équipes.</p>
+        <div class="panel-head-roles">
+          <span class="role-chip">Head of Chapter</span>
+          <span class="role-chip">Head of Platform</span>
+          <span class="role-chip">Management R&amp;I</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-cols">
+      <div>
+        <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
+        <div class="panel-quotes">
+          <div class="pain-quote"><q>J'apprends les risques majeurs de mes équipes le soir du vote de confiance. À ce stade, il est trop tard pour agir.</q><cite>- Head of Platform</cite></div>
+          <div class="pain-quote"><q>Je découvre les dépendances bloquantes en plénière - jamais avant.</q><cite>- Head of Chapter</cite></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-col-label">Ce que ça change</div>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Cockpit agrégé : scorecard de toutes vos équipes, risque composite, dépendances bloquantes - en lecture seule.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Vote de confiance : résultats agrégés en direct, aucun dépouillement manuel.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Drill-down équipe : objectifs, risques, dépendances - sans interrompre le breakout.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Bilan disponible dès la fin du PI - plus de reconstruction a posteriori.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 8 · ORCHESTRATEUR & CONTRIBUTEUR ═══════════════════ -->
+<section class="section section--alt slide panel-orchestrateur" id="persona-orchestrateur">
+  <div class="container">
+    <div class="persona-switch">
+      <a href="#persona-decideur" class="persona-switch-item" data-persona="decideur">⚖️ Décideurs</a>
+      <a href="#persona-orchestrateur" class="persona-switch-item is-current" data-persona="orchestrateur">🎼 Orchestrateurs &amp; Contributeurs</a>
+      <a href="#persona-popl" class="persona-switch-item" data-persona="popl">🎯 PO &amp; Product Tech Lead</a>
+      <a href="#persona-membre" class="persona-switch-item" data-persona="membre">🎵 Membres</a>
+    </div>
+
+    <div class="panel-head">
+      <div class="panel-head-icon">🎼</div>
+      <div class="panel-head-body">
+        <h3>Un seul cockpit pour tout le PI</h3>
+        <p>Setup, publication, coordination du jour J, vote, bilan - aujourd'hui répartis dans plusieurs outils qui ne se parlent pas. acCordance réunit tout dans un flux continu.</p>
+        <div class="panel-head-roles">
+          <span class="role-chip">Orchestrateur</span>
+          <span class="role-chip">Contributeur</span>
+          <span class="role-chip">Agile Coach</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-cols">
+      <div>
+        <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
+        <div class="panel-quotes">
+          <div class="pain-quote"><q>Je configure le PI dans Excel, Confluence, Klaxoon et Teams. À chaque changement de date, je resynchronise les quatre à la main.</q><cite>- Orchestrateur</cite></div>
+          <div class="pain-quote"><q>Pendant le breakout, zéro visibilité sur l'avancement des équipes. Je cours de table en table.</q><cite>- Orchestrateur</cite></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-col-label">Ce que ça change</div>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Wizard de configuration guidé (dates, équipes, agenda, plateformes) - sauvegarde automatique.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Publication → magic links envoyés automatiquement, plus d'invitations manuelles une à une.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Dashboard live + supervision des risques et dépendances cross-équipes pendant le PI.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Bilan généré automatiquement en fin de PI - plus de consolidation manuelle équipe par équipe.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 9 · PO & PL ════════════════════════════════════════ -->
+<section class="section slide panel-popl" id="persona-popl">
+  <div class="container">
+    <div class="persona-switch">
+      <a href="#persona-decideur" class="persona-switch-item" data-persona="decideur">⚖️ Décideurs</a>
+      <a href="#persona-orchestrateur" class="persona-switch-item" data-persona="orchestrateur">🎼 Orchestrateurs &amp; Contributeurs</a>
+      <a href="#persona-popl" class="persona-switch-item is-current" data-persona="popl">🎯 PO &amp; Product Tech Lead</a>
+      <a href="#persona-membre" class="persona-switch-item" data-persona="membre">🎵 Membres</a>
+    </div>
+
+    <div class="panel-head">
+      <div class="panel-head-icon">🎯</div>
+      <div class="panel-head-body">
+        <h3>Un espace de travail d'équipe, pas un Excel</h3>
+        <p>Objectifs, risques, dépendances - aujourd'hui dispersés entre Excel, Post-its et emails. acCordance centralise tout dans un seul espace, du breakout à la plénière.</p>
+        <div class="panel-head-roles">
+          <span class="role-chip">Product Owner</span>
+          <span class="role-chip">Product Tech Lead</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-cols">
+      <div>
+        <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
+        <div class="panel-quotes">
+          <div class="pain-quote"><q>On gère les objectifs sur Excel, les risques sur Post-it, les dépendances par email. Rien n'est lié.</q><cite>- Product Owner</cite></div>
+          <div class="pain-quote"><q>Je ne sais pas quelles dépendances sont bloquantes pour nous avant la plénière. Trop tard pour renégocier.</q><cite>- Product Tech Lead</cite></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-col-label">Ce que ça change</div>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Un espace de travail d'équipe : objectifs, risques, dépendances - tous reliés entre eux.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Import depuis Excel par simple copier-coller.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Présentation plénière générée depuis vos objectifs - sans PowerPoint refait la veille à minuit.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Multi-équipes géré nativement pour les PO qui portent plusieurs équipes.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 10 · MEMBRE ════════════════════════════════════════ -->
+<section class="section section--alt slide panel-membre" id="persona-membre">
+  <div class="container">
+    <div class="persona-switch">
+      <a href="#persona-decideur" class="persona-switch-item" data-persona="decideur">⚖️ Décideurs</a>
+      <a href="#persona-orchestrateur" class="persona-switch-item" data-persona="orchestrateur">🎼 Orchestrateurs &amp; Contributeurs</a>
+      <a href="#persona-popl" class="persona-switch-item" data-persona="popl">🎯 PO &amp; Product Tech Lead</a>
+      <a href="#persona-membre" class="persona-switch-item is-current" data-persona="membre">🎵 Membres</a>
+    </div>
+
+    <div class="panel-head">
+      <div class="panel-head-icon">🎵</div>
+      <div class="panel-head-body">
+        <h3>Votre PI en 3 gestes simples</h3>
+        <p>Pas de compte à créer, pas de formation. Un lien dans votre boîte mail, et vous êtes prêt à suivre l'agenda, contribuer et voter.</p>
+        <div class="panel-head-roles">
+          <span class="role-chip">Développeur</span>
+          <span class="role-chip">Designer</span>
+          <span class="role-chip">PMO</span>
+          <span class="role-chip">BRM</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-cols">
+      <div>
+        <div class="panel-col-label">Ce que vous vivez aujourd'hui</div>
+        <div class="panel-quotes">
+          <div class="pain-quote"><q>Je reçois un lien le matin du PI, sans savoir à quelle heure voter ni où trouver mon agenda.</q><cite>- Membre</cite></div>
+          <div class="pain-quote"><q>Les objectifs de l'équipe, je les découvre en plénière. Trop tard pour donner un vrai avis.</q><cite>- Membre</cite></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel-col-label">Ce que ça change</div>
+        <div class="ba-items">
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Agenda en direct : où vous devez être, mis à jour automatiquement si une session est décalée.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Contribution aux objectifs, risques et dépendances de votre équipe, en temps réel avec vos collègues.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Vote de confiance en un geste, depuis votre téléphone.</span></div>
+          <div class="ba-item"><span class="ba-icon">✅</span><span>Vos décisions restent accessibles après le PI - plus de compte-rendu introuvable.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 11 · VISION ÉLARGIE - CARTE DE FLOW ═══════════════════ -->
+<section class="section slide" id="blueprint">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">Pour aller plus loin</span>
@@ -463,25 +520,41 @@
     localStorage.setItem('accordance-theme', next);
   });
 
-  // Onglets persona
-  function activateTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach((b) => {
-      const isActive = b.dataset.tab === tabName;
-      b.classList.toggle('active', isActive);
-      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  // ── Slides : rail de progression (IntersectionObserver) ──────────────────
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dots = Array.from(document.querySelectorAll('.slide-dot'));
+  const dotBySlideId = {};
+  dots.forEach((d) => { dotBySlideId[d.getAttribute('href').slice(1)] = d; });
+
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const dot = dotBySlideId[entry.target.id];
+      if (!dot) return;
+      dot.classList.toggle('active', entry.isIntersecting);
     });
-    document.querySelectorAll('.tab-panel').forEach((p) => {
-      p.classList.toggle('active', p.id === 'panel-' + tabName);
+  }, { threshold: 0.6 });
+  slides.forEach((s) => slideObserver.observe(s));
+
+  // ── Slides : navigation clavier (une slide à la fois) ─────────────────────
+  function currentSlideIndex() {
+    let idx = 0, minDist = Infinity;
+    slides.forEach((s, i) => {
+      const d = Math.abs(s.getBoundingClientRect().top - 61);
+      if (d < minDist) { minDist = d; idx = i; }
     });
+    return idx;
   }
-  document.querySelectorAll('.tab-btn').forEach((btn) => {
-    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
-  });
-  document.querySelectorAll('[data-jump-tab]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      activateTab(btn.dataset.jumpTab);
-      document.getElementById('personas').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      e.preventDefault();
+      const next = Math.min(slides.length - 1, currentSlideIndex() + 1);
+      slides[next].scrollIntoView({ behavior: 'instant', block: 'start' });
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      const prev = Math.max(0, currentSlideIndex() - 1);
+      slides[prev].scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
   });
 </script>
 
