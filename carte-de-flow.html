@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carte de flow · acCordance · PI Planning L'Oréal R&amp;I</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid #D9D9D9;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.10);font:600 12.5px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#111 !important;text-decoration:none !important" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,0.16)'" onmouseout="this.style.boxShadow='0 1px 4px rgba(0,0,0,0.10)'">← Retour à la présentation</a>
+<x-dc>
+<helmet>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#FAFAFA}
+  body{-webkit-font-smoothing:antialiased}
+  a{color:#0055CC;text-decoration:none}
+  a:hover{color:#006EF9;text-decoration:underline}
+  @page{size:A3 landscape;margin:10mm}
+  @media print{
+    .noprint{display:none !important}
+    .swim{page-break-inside:avoid;break-inside:avoid}
+  }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:rgba(0,0,0,0.88);background:#FAFAFA;min-height:100vh;font-size:13px;line-height:1.5;padding:32px 28px 120px">
+
+  <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-bottom:22px">
+    <div style="display:flex;flex-direction:column;gap:9px;flex:1;min-width:420px">
+      <div style="display:flex;align-items:center;gap:8px;font-size:10.5px;text-transform:uppercase;letter-spacing:0.9px;font-weight:700;color:rgba(0,0,0,0.45)">
+        <span style="width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#3AE2D8,#006EF9)"></span>
+        <span>{{ crumb }}</span>
+      </div>
+      <h1 style="margin:0;font-size:29px;line-height:1.14;font-weight:700;letter-spacing:-0.6px">{{ h1a }} <span style="background:linear-gradient(90deg,#3AE2D8,#006EF9);-webkit-background-clip:text;background-clip:text;color:transparent">{{ h1b }}</span></h1>
+      <p style="margin:0;font-size:13.5px;color:rgba(0,0,0,0.60);max-width:900px;text-wrap:pretty">{{ sub }}</p>
+    </div>
+    <div class="noprint" style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+      <div style="display:flex;gap:1px;background:#D9D9D9;border:1px solid #D9D9D9;border-radius:6px;overflow:hidden">
+        <button onClick="{{ setFR }}" style="{{ frBtn }}">FR</button>
+        <button onClick="{{ setEN }}" style="{{ enBtn }}">EN</button>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <button onClick="{{ zoomOut }}" style="width:26px;height:26px;border:1px solid #D9D9D9;background:#FFF;border-radius:6px;cursor:pointer;font-size:14px;color:rgba(0,0,0,0.60);line-height:1">−</button>
+        <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:11px;color:rgba(0,0,0,0.45);min-width:38px;text-align:center">{{ zoomLabel }}</span>
+        <button onClick="{{ zoomIn }}" style="width:26px;height:26px;border:1px solid #D9D9D9;background:#FFF;border-radius:6px;cursor:pointer;font-size:14px;color:rgba(0,0,0,0.60);line-height:1">+</button>
+        <button onClick="{{ toggleAll }}" style="{{ allBtn }}">{{ allLabel }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#D9D9D9;border:1px solid #D9D9D9;border-radius:10px;overflow:hidden;margin-bottom:22px">
+    <sc-for list="{{ lanes }}" as="ln" hint-placeholder-count="6">
+      <div style="background:#FFF;padding:11px 13px;display:flex;flex-direction:column;gap:3px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="width:8px;height:8px;border-radius:2px;background:{{ ln.color }}"></span>
+          <span style="font-size:11.5px;font-weight:700;letter-spacing:-0.1px">{{ ln.label }}</span>
+        </div>
+        <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9.5px;color:rgba(0,0,0,0.45);line-height:1.45">{{ ln.role }}</span>
+        <span style="font-size:10px;color:rgba(0,0,0,0.45);margin-top:1px">{{ ln.device }}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div class="noprint" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;align-items:center">
+    <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.7px;font-weight:700;color:rgba(0,0,0,0.45);margin-right:4px">{{ jLabel }}</span>
+    <sc-for list="{{ chips }}" as="j" hint-placeholder-count="11">
+      <button onClick="{{ j.pick }}" style="{{ j.css }}">{{ j.n }}<span style="opacity:0.5;margin-left:5px;font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9.5px">{{ j.count }}</span></button>
+    </sc-for>
+  </div>
+
+  <div class="noprint" style="display:flex;flex-wrap:wrap;gap:14px;padding:9px 0 16px;font-size:10.5px;color:rgba(0,0,0,0.60);border-bottom:1px solid #F0F0F0;margin-bottom:22px">
+    <sc-for list="{{ rightsLegend }}" as="r" hint-placeholder-count="5">
+      <span style="display:inline-flex;align-items:center;gap:5px"><span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:{{ r.bg }};color:{{ r.c }}">{{ r.l }}</span>{{ r.d }}</span>
+    </sc-for>
+    <span style="margin-left:auto;color:rgba(0,0,0,0.45)">{{ hint }}</span>
+  </div>
+
+  <div class="noprint" style="margin-bottom:24px;border:1px solid #D9D9D9;border-radius:12px;background:#FFF;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+        <span style="font-size:13px;font-weight:700;letter-spacing:-0.1px">{{ libTitle }}</span>
+        <span style="font-size:11.5px;color:rgba(0,0,0,0.60)">{{ libSub }}</span>
+      </div>
+      <button onClick="{{ toggleLib }}" style="{{ libBtn }}">{{ libLabel }}</button>
+    </div>
+    <sc-if value="{{ libOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <sc-for list="{{ shotSlots }}" as="sh" hint-placeholder-count="8">
+          <div style="display:flex;flex-direction:column;gap:4px;width:190px">
+            <div style="display:flex;align-items:center;gap:5px">
+              <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9px;font-weight:700;padding:1px 4px;border-radius:3px;background:#F5F5F5">{{ sh.code }}</span>
+              <span style="font-size:10px;color:rgba(0,0,0,0.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ sh.title }}</span>
+            </div>
+            <div style="position:relative;width:190px;height:118px">
+              <image-slot id="{{ sh.id }}" shape="rounded" radius="6" fit="cover" placeholder="{{ sh.ph }}"></image-slot>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:44px">
+    <sc-for list="{{ blocks }}" as="b" hint-placeholder-count="1">
+      <section class="swim" style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:11px;font-weight:700;color:#006EF9">{{ b.tag }}</span>
+          <h2 style="margin:0;font-size:17px;font-weight:700;letter-spacing:-0.3px">{{ b.name }}</h2>
+          <p style="margin:0;font-size:12px;color:rgba(0,0,0,0.60);flex:1;min-width:280px">{{ b.desc }}</p>
+        </div>
+
+        <div onMouseLeave="{{ clearHover }}" style="overflow-x:auto;border:1px solid #D9D9D9;border-radius:12px;background:#FFF">
+          <div data-grid="1" style="{{ b.zoomCss }}">
+            <svg data-arrows="1" style="position:absolute;inset:0;overflow:visible;pointer-events:none;z-index:3"></svg>
+            <div style="display:flex;border-bottom:1px solid #D9D9D9;background:#F5F5F5">
+              <div style="width:186px;flex:0 0 186px;padding:7px 12px;border-right:1px solid #D9D9D9;position:sticky;left:0;background:#F5F5F5;z-index:4"></div>
+              <sc-for list="{{ b.groups }}" as="g" hint-placeholder-count="3">
+                <div style="width:{{ g.px }}px;flex:0 0 {{ g.px }}px;padding:7px 12px;border-right:1px solid #D9D9D9;display:flex;align-items:center;gap:7px">
+                  <span style="width:5px;height:5px;border-radius:50%;background:{{ g.color }}"></span>
+                  <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.9px;font-weight:700;color:{{ g.color }}">{{ g.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;border-bottom:1px solid #D9D9D9;background:#FAFAFA">
+              <div style="width:186px;flex:0 0 186px;padding:9px 12px;border-right:1px solid #D9D9D9;font-size:9.5px;text-transform:uppercase;letter-spacing:0.7px;font-weight:700;color:rgba(0,0,0,0.45);position:sticky;left:0;background:#FAFAFA;z-index:4">{{ b.laneHead }}</div>
+              <sc-for list="{{ b.steps }}" as="s" hint-placeholder-count="6">
+                <div style="width:{{ s.px }}px;flex:0 0 {{ s.px }}px;padding:9px 12px;border-right:1px solid #F0F0F0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9px;color:rgba(0,0,0,0.45);font-weight:700">{{ s.n }}</span>
+                  <span style="font-size:11.5px;font-weight:600;line-height:1.35">{{ s.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <sc-for list="{{ b.lanes }}" as="ln" hint-placeholder-count="6">
+              <div style="display:flex;border-bottom:1px solid #F0F0F0;background:{{ ln.rowBg }}">
+                <div style="width:186px;flex:0 0 186px;padding:12px;border-right:1px solid #D9D9D9;display:flex;flex-direction:column;gap:3px;position:sticky;left:0;background:{{ ln.stickyBg }};z-index:2">
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <span style="width:3px;height:14px;border-radius:2px;background:{{ ln.color }}"></span>
+                    <span style="font-size:11.5px;font-weight:700">{{ ln.label }}</span>
+                  </div>
+                  <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9px;color:rgba(0,0,0,0.45);line-height:1.4">{{ ln.short }}</span>
+                </div>
+                <sc-for list="{{ ln.cells }}" as="cl" hint-placeholder-count="6">
+                  <div style="width:{{ cl.px }}px;flex:0 0 {{ cl.px }}px;padding:10px;border-right:1px solid #F0F0F0;display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px">
+                    <sc-for list="{{ cl.cards }}" as="c" hint-placeholder-count="1">
+                      <div data-card="1" data-active="{{ c.act }}" data-path="{{ c.route }}" onClick="{{ c.open }}" onMouseEnter="{{ c.hoverOn }}" onMouseLeave="{{ c.hoverOff }}" style="{{ c.css }}">
+                        <div style="display:flex;align-items:center;gap:6px">
+                          <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9px;font-weight:700;padding:1px 4px;border-radius:3px;background:{{ c.codeBg }};color:{{ c.codeFg }}">{{ c.code }}</span>
+                          <span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:{{ c.rBg }};color:{{ c.rFg }}">{{ c.rLabel }}</span>
+                          <span style="margin-left:auto;font-size:9px;color:rgba(0,0,0,0.45);letter-spacing:0.5px">{{ c.flags }}</span>
+                        </div>
+                        <span style="font-size:11.5px;font-weight:600;line-height:1.3;letter-spacing:-0.1px">{{ c.title }}</span>
+                        <sc-if value="{{ c.hasShot }}" hint-placeholder-val="{{ false }}">
+                          <div style="{{ c.shotCss }}"></div>
+                        </sc-if>
+                        <sc-if value="{{ c.noShot }}" hint-placeholder-val="{{ true }}">
+                          <div style="display:flex;flex-direction:column;gap:2px;padding:6px;background:#FAFAFA;border:1px solid #F0F0F0;border-radius:4px">
+                            <sc-for list="{{ c.rows }}" as="r" hint-placeholder-count="4">
+                              <div style="display:flex;gap:2px;align-items:stretch">
+                                <sc-for list="{{ r }}" as="bk" hint-placeholder-count="2">
+                                  <div style="{{ bk.css }}"></div>
+                                </sc-for>
+                              </div>
+                            </sc-for>
+                          </div>
+                        </sc-if>
+                        <sc-for list="{{ c.btns }}" as="bt" hint-placeholder-count="2">
+                          <div data-dest="{{ bt.route }}" style="display:flex;flex-wrap:wrap;align-items:center;gap:4px">
+                            <span style="{{ bt.css }}">{{ bt.l }}</span>
+                            <span style="font-size:10px;color:rgba(0,0,0,0.25);line-height:1">→</span>
+                            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9px;font-weight:700;color:{{ bt.dc }};line-height:1.4">{{ bt.d }}</span>
+                          </div>
+                        </sc-for>
+                        <sc-if value="{{ c.hasNote }}" hint-placeholder-val="{{ false }}">
+                          <span style="font-size:9.5px;color:rgba(0,0,0,0.45);line-height:1.4;font-style:italic">{{ c.note }}</span>
+                        </sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+    <div class="noprint" style="position:fixed;top:0;right:0;bottom:0;width:400px;background:#FFF;border-left:1px solid #D9D9D9;box-shadow:0 12px 32px rgba(0,0,0,0.12);z-index:50;overflow-y:auto;padding:20px 22px 60px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <div style="display:flex;flex-direction:column;gap:5px;flex:1">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:#E6F0FF;color:#0055CC">{{ sel.code }}</span>
+            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:10px;color:rgba(0,0,0,0.45)">{{ sel.path }}</span>
+          </div>
+          <h3 style="margin:0;font-size:17px;font-weight:700;letter-spacing:-0.3px">{{ sel.title }}</h3>
+          <span style="font-size:11px;color:rgba(0,0,0,0.45)">{{ sel.file }}</span>
+        </div>
+        <button onClick="{{ close }}" style="width:28px;height:28px;border:1px solid #D9D9D9;background:#FFF;border-radius:6px;cursor:pointer;color:rgba(0,0,0,0.60);font-size:14px;line-height:1">✕</button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <span style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;color:rgba(0,0,0,0.45)">{{ sel.tRights }}</span>
+        <sc-for list="{{ sel.rights }}" as="r" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:8px;padding:7px 9px;border:1px solid #F0F0F0;border-radius:6px">
+            <span style="width:3px;height:16px;border-radius:2px;background:{{ r.color }}"></span>
+            <span style="font-size:11.5px;font-weight:600;flex:1">{{ r.lane }}</span>
+            <span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:{{ r.bg }};color:{{ r.c }}">{{ r.l }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <span style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;color:rgba(0,0,0,0.45)">{{ sel.tBtns }}</span>
+        <sc-for list="{{ sel.btns }}" as="bt" hint-placeholder-count="3">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:7px 0;border-bottom:1px solid #F0F0F0">
+            <span style="{{ bt.css }}">{{ bt.l }}</span>
+            <span style="font-size:11px;color:rgba(0,0,0,0.25);line-height:1">→</span>
+            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:10px;font-weight:700;color:{{ bt.dc }}">{{ bt.d }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <span style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;color:rgba(0,0,0,0.45)">{{ sel.tTables }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <sc-for list="{{ sel.tables }}" as="tb" hint-placeholder-count="3">
+            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9.5px;padding:2px 6px;border-radius:4px;background:#F5F5F5;border:1px solid #F0F0F0;color:rgba(0,0,0,0.60)">{{ tb }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <span style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;color:rgba(0,0,0,0.45)">{{ sel.tJourneys }}</span>
+        <sc-for list="{{ sel.journeys }}" as="j" hint-placeholder-count="2">
+          <button onClick="{{ j.pick }}" style="text-align:left;border:1px solid #F0F0F0;background:#FAFAFA;border-radius:6px;padding:7px 9px;cursor:pointer;font:inherit;font-size:11.5px;color:rgba(0,0,0,0.88);display:flex;gap:7px;align-items:center">
+            <span style="font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9.5px;font-weight:700;color:#006EF9">{{ j.tag }}</span>{{ j.n }}
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ sel.hasNotes }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:5px;padding:11px;background:#FAFAFA;border:1px solid #F0F0F0;border-radius:8px">
+          <span style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;color:rgba(0,0,0,0.45)">{{ sel.tNotes }}</span>
+          <span style="font-size:11.5px;color:rgba(0,0,0,0.60);line-height:1.55;text-wrap:pretty">{{ sel.notes }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <footer style="margin-top:56px;padding-top:18px;border-top:1px solid #F0F0F0;display:flex;justify-content:space-between;color:rgba(0,0,0,0.45);font-size:11px">
+    <div>
+      <div style="height:3px;width:64px;background:linear-gradient(90deg,#3AE2D8,#006EF9);border-radius:2px;margin-bottom:12px"></div>
+      {{ footL }}
+    </div>
+    <div>acCordance · PI Planning · L'Oréal R&amp;I</div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600,&quot;height&quot;:1000}}">
+const LANES = [
+  { id:'p1',  fr:'P1 · Orchestrateur', en:'P1 · Orchestrator', color:'#006EF9', bg:'#E6F0FF',
+    roleFr:'profil orchestrateur', roleEn:'orchestrateur profile',
+    shortFr:'coach produit · RTE · chapter', shortEn:'product coach · RTE · chapter',
+    devFr:'Desktop · accès total', devEn:'Desktop · full access' },
+  { id:'p2',  fr:'P2 · Contributeur', en:'P2 · Contributor', color:'#0FA69D', bg:'#E6FFFE',
+    roleFr:'profil contributeur', roleEn:'contributeur profile',
+    shortFr:'logistique · salles · accueil', shortEn:'logistics · rooms · welcome desk',
+    devFr:'Desktop · CONTRIBUTEUR_PATHS', devEn:'Desktop · CONTRIBUTEUR_PATHS' },
+  { id:'p3',  fr:'P3 · Décideur', en:'P3 · Decision maker', color:'#5A4E82', bg:'#F0EEF8',
+    roleFr:'participant + rôle decideur', roleEn:'participant + decideur role',
+    shortFr:'head of platform · management', shortEn:'head of platform · management',
+    devFr:'Desktop · DECIDEUR_PATHS', devEn:'Desktop · DECIDEUR_PATHS' },
+  { id:'po',  fr:'P4a · PO / PTL', en:'P4a · PO / PTL', color:'#C07A10', bg:'#FEF3E2',
+    roleFr:'rôles po · ptl', roleEn:'po · ptl roles',
+    shortFr:'engage : consolide · soumet · présente', shortEn:'commits: consolidates · submits · presents',
+    devFr:'Desktop · MEMBRE_PATHS', devEn:'Desktop · MEMBRE_PATHS' },
+  { id:'mb',  fr:'P4b · Membre', en:'P4b · Member', color:'#389E0D', bg:'#F6FFED',
+    roleFr:'rôles membre · tech_lead · ux · coach · expert_framing', roleEn:'membre · tech_lead · ux · coach · expert_framing roles',
+    shortFr:'produit objectifs · risques · deps', shortEn:'produces objectives · risks · deps',
+    devFr:'Desktop · MEMBRE_PATHS', devEn:'Desktop · MEMBRE_PATHS' },
+  { id:'sys', fr:'Système', en:'System', color:'#595959', bg:'#F5F5F5',
+    roleFr:'Realtime · Edge functions · Brevo', roleEn:'Realtime · Edge functions · Brevo',
+    shortFr:'automatique, sans écran', shortEn:'automatic, no screen',
+    devFr:'Supabase · Vercel', devEn:'Supabase · Vercel' },
+];
+
+const GROUPS = {
+  ent: { fr:'Entrée & accueil', en:'Entry & home',            color:'#595959' },
+  av:  { fr:'Avant le PI Planning', en:'Before the PI Planning', color:'#0FA69D' },
+  pdt: { fr:'Pendant le PI Planning', en:'During the PI Planning', color:'#C07A10' },
+  ap:  { fr:'Après le PI Planning', en:'After the PI Planning',  color:'#5A4E82' },
+};
+const COLW = 304;
+
+const RIGHTS = {
+  e:   { fr:'Édition',    en:'Edit',      c:'#0055CC', bg:'#E6F0FF', dFr:'saisie et modification', dEn:'create and modify' },
+  s:   { fr:'Soumission', en:'Submit',    c:'#0FA69D', bg:'#E6FFFE', dFr:'engage / verrouille',    dEn:'commits / locks' },
+  l:   { fr:'Lecture',    en:'Read',      c:'rgba(0,0,0,0.60)', bg:'#F5F5F5', dFr:'lecture seule',  dEn:'read only' },
+  a:   { fr:'Arbitrage',  en:'Arbitrate', c:'#5A4E82', bg:'#F0EEF8', dFr:'décide / conteste',      dEn:'decides / challenges' },
+  x:   { fr:'Auto',       en:'Auto',      c:'#595959', bg:'#F5F5F5', dFr:'déclenché par le système', dEn:'system triggered' },
+};
+
+// Preview archetypes — rows of blocks {w: flex, h: px, t: tone}
+const T = { 1:'#F0F0F0', 2:'#D9D9D9', 3:'linear-gradient(90deg,#3AE2D8,#006EF9)', 4:'#FFF' };
+const ARCH = {
+  form:    [[[4,7,2]],[[6,13,1],[6,13,1]],[[6,13,1],[6,13,1]],[[3,8,3],[7,8,4]]],
+  table:   [[[3,7,2],[2,7,1]],[[12,6,2]],[[12,6,1]],[[12,6,1]],[[12,6,1]],[[3,8,3]]],
+  tiles:   [[[4,16,1],[4,16,1],[4,16,1]],[[12,7,2]],[[12,6,1]],[[12,6,1]]],
+  agenda:  [[[2,30,1],[5,30,2],[5,30,1]],[[12,6,1]],[[3,8,3],[4,8,4]]],
+  stepper: [[[2,7,3],[2,7,3],[2,7,2],[2,7,1],[2,7,1]],[[12,14,1]],[[7,7,2],[5,7,1]],[[4,8,3]]],
+  kanban:  [[[3,34,1],[3,34,1],[3,34,1],[3,34,2]],[[6,6,1],[4,6,1]]],
+  matrix:  [[[3,7,2],[9,7,1]],[[2,8,1],[2,8,2],[2,8,1],[2,8,1],[2,8,2],[2,8,1]],[[2,8,2],[2,8,1],[2,8,1],[2,8,2],[2,8,1],[2,8,1]],[[12,7,1]]],
+  mobile:  [[[3,6,2],[9,6,1]],[[12,20,1]],[[12,20,1]],[[12,9,3]]],
+  present: [[[8,12,3]],[[12,26,1]],[[4,7,2],[4,7,1],[4,7,1]]],
+  map:     [[[7,40,1],[5,40,2]],[[4,7,3],[4,7,1]]],
+  hub:     [[[12,6,1]],[[12,22,3]],[[7,9,2],[5,9,1]],[[12,7,1]]],
+  vote:    [[[6,7,2]],[[2,20,1],[2,20,1],[2,20,3],[2,20,1],[2,20,1]],[[12,9,4]]],
+  auth:    [[[5,8,2]],[[12,14,1]],[[12,14,1]],[[5,9,3]]],
+  sys:     [[[3,7,2],[9,7,1]],[[12,10,4]],[[12,10,4]]],
+  grid:    [[[3,7,2],[4,7,1]],[[2,10,3],[2,10,1],[2,10,1],[2,10,3],[2,10,1],[2,10,1]],[[2,10,1],[2,10,3],[2,10,1],[2,10,1],[2,10,1],[2,10,3]],[[12,7,1]]],
+  list:    [[[5,7,2]],[[12,12,1]],[[12,12,1]],[[12,12,1]]],
+};
+
+// b: [fr, en, dest]
+const S = {
+  login:   { code:'S-Login', path:'/login', file:'SLogin.tsx', arch:'auth', flags:'',
+    tFr:'Connexion OTP', tEn:'OTP sign-in', tables:['auth.users','participants'],
+    b:[['Envoyer le code →','Send code →','OTP email'],['Valider le code →','Verify code →','LoginRouter']],
+    nFr:'shouldCreateUser: false — deux erreurs distinctes (email inconnu / code invalide).', nEn:'shouldCreateUser: false — two distinct errors (unknown email / invalid code).' },
+  pis:     { code:'S-ListePIs', path:'/home-pis', file:'SListePIs.tsx', arch:'list', flags:'',
+    tFr:'Liste des PIs', tEn:'PI list', tables:['pi_plannings','participants'],
+    b:[['Nouveau PI','New PI','/s01','/s01','p1'],['Configurer','Configure','/s01','/s01','p1'],['Rejoindre','Join','/s-home-pi'],['Voir le bilan','View review','/s-home-pi']],
+    nFr:'Sections En cours / À venir / Passés dérivées des dates. « Nouveau PI » visible P1 uniquement.', nEn:'Ongoing / Upcoming / Past sections derived from dates. "New PI" visible to P1 only.' },
+  hub:     { code:'S-HomePi', path:'/s-home-pi', file:'SHomePi.tsx', arch:'hub', flags:'⚡',
+    tFr:'Hub PI', tEn:'PI hub', tables:['agenda_sessions','meetings','notifications','objectives','dependencies'],
+    b:[['Annonce','Announcement','AnnouncementComposer','AnnouncementComposer','p1,p2'],['Rejoindre les objectifs','Join the objectives','/s27?team=','/s27?team='],['Ouvrir le check-in','Open check-in','/s10','/s10','p1,p2'],['Ajouter le lieu','Add the venue','/s01?pi=','/s01?pi=','p1']],
+    nFr:'Cockpit unique par profil : tiroir Plus tôt → hero Maintenant → À traiter → tiroir À venir. Le CTA hero vient de agenda_sessions.linked_screen, filtré par allowedPathsFor().', nEn:'One cockpit per profile: Earlier drawer → Now hero → To handle → Upcoming drawer. The hero CTA comes from agenda_sessions.linked_screen, filtered by allowedPathsFor().' },
+  s01:     { code:'S-01', path:'/s01', file:'S01NouveauPI.tsx', arch:'form', flags:'',
+    tFr:'Identité du PI', tEn:'PI identity', tables:['pi_plannings'],
+    b:[['Créer le PI Planning →','Create PI Planning →','/s02'],['Enregistré ✓','Saved ✓','—']],
+    nFr:'Formulaire unique, pas de wizard. Mode édition via ?pi={id}. Upload photos du lieu (bucket RLS).', nEn:'Single form, no wizard. Edit mode via ?pi={id}. Venue photo upload (RLS bucket).' },
+  s02:     { code:'S-02', path:'/s02', file:'S02Equipes.tsx', arch:'table', flags:'',
+    tFr:'Équipes & cadence sprint', tEn:'Teams & sprint cadence', tables:['teams','participant_team_roles'],
+    b:[['Enregistrer','Save','drawer'],['Annuler','Cancel','—']],
+    nFr:'Source de vérité unique pour PO/PTL — non assignables en S-03. Plateforme en chips inline (eBP/eEx/eDi/Cha).', nEn:'Single source of truth for PO/PTL — not assignable in S-03. Platform as inline chips (eBP/eEx/eDi/Cha).' },
+  s19:     { code:'S-19', path:'/s19', file:'S19VoeuxEquipe.tsx', arch:'tiles', flags:'',
+    tFr:'Gérer les vœux', tEn:'Manage applications', tables:['registrations','registration_team_roles'],
+    b:[['Rappel ({{count}})','Reminder ({{count}})','Brevo'],['Approuver ({{count}})','Approve ({{count}})','participants + magic link'],['Refuser ({{count}})','Reject ({{count}})','Brevo']],
+    nFr:'Import CSV dédupliqué (pi_id, email). L’ouverture de la période envoie les invitations Brevo. L’approbation crée le participant + participant_team_roles.', nEn:'Deduplicated CSV import (pi_id, email). Opening the window sends the Brevo invites. Approval creates the participant + participant_team_roles.' },
+  s20:     { code:'S-20', path:'/s20?token=', file:'S20EditionVoeu.tsx', arch:'mobile', flags:'🔓',
+    tFr:'Formulaire de vœu', tEn:'Application form', tables:['registrations','registration_team_roles'],
+    b:[['Soumettre mon vœu','Submit my application','/s19 · Candidatures','/s19 · Applications']],
+    nFr:'Route publique, sans authentification. Token invalide → TokenErrorPage inline. Soumission désactivée tant qu’aucun rôle n’est choisi.', nEn:'Public route, no authentication. Invalid token → inline TokenErrorPage. Submit disabled until a role is picked.' },
+  s03:     { code:'S-03', path:'/s03', file:'S03Participants.tsx', arch:'table', flags:'',
+    tFr:'Participants', tEn:'Participants', tables:['participants','participant_team_roles'],
+    b:[['Assigner →','Assign →','participant_team_roles'],['Enregistrer','Save','drawer']],
+    nFr:'CRUD + export CSV (BOM UTF-8). Filtres en chips plateforme / profil + recherche.', nEn:'CRUD + CSV export (UTF-8 BOM). Platform / profile chip filters + search.' },
+  s04:     { code:'S-04', path:'/s04', file:'S04ConfigAgenda.tsx', arch:'agenda', flags:'',
+    tFr:'Agenda & salles', tEn:'Agenda & rooms', tables:['agenda_sessions','agenda_session_types','meeting_rooms','room_availabilities'],
+    b:[['Sauvegarder','Save','dirtyIds'],['Annuler','Cancel','—']],
+    nFr:'Vue 3 jours (fenêtre glissante), axe 8h-20h. Une session porte au plus un écran de travail (linked_screen) → CTA hero du Hub.', nEn:'3-day sliding view, 8am-8pm axis. A session carries at most one work screen (linked_screen) → the hub hero CTA.' },
+  s08:     { code:'S-08', path:'/s08', file:'S08AperçuPlanning.tsx', arch:'stepper', flags:'',
+    tFr:'Aperçu & publication', tEn:'Preview & publish', tables:['pi_plannings','venue_zones'],
+    b:[['Publier le PI','Publish the PI','magic links + published'],['Démarrer le PI →','Start the PI →','/s11 · active'],['Archiver ce PI','Archive this PI','archived'],['Voir le Bilan PI →','View the PI Review →','/s11'],['Retour à mes PI','Back to my PIs','/home-pis']],
+    nFr:'Stepper cycle de vie 5 étapes + checklist bloquante (équipes, PO, participants). Publier publie aussi le plan de salle s’il est saved. L’archivage (ex-S-47) vit ici.', nEn:'5-step lifecycle stepper + blocking checklist (teams, PO, participants). Publishing also publishes the venue plan if saved. Archiving (ex-S-47) lives here.' },
+  s09a:    { code:'S-09 · Lieu', codeEn:'S-09 · Venue', path:'/s09?tab=lieu', file:'S09PlanDeSalle.tsx', arch:'map', flags:'⚡',
+    tFr:'Zones & tables', tEn:'Zones & tables', tables:['venue_zones','venue_tables'],
+    b:[['Enregistrer','Save','venue_plan_status: saved']],
+    nFr:'Plafond de sécurité par zone, salle réservable liée, générateur de tables en masse, upload de plan + épingles glisser-déposer.', nEn:'Per-zone safety cap, linked bookable room, bulk table generator, floor-plan upload + drag-and-drop pins.' },
+  s09b:    { code:'S-09 · Placement', codeEn:'S-09 · Seating', path:'/s09?tab=placement', file:'S09PlanDeSalle.tsx', arch:'map', flags:'⚡',
+    tFr:'Générateur de placement', tEn:'Seating generator', tables:['venue_table_assignments','dependencies'],
+    b:[['Générer','Generate','score affinité','affinity score'],['Reshuffle','Reshuffle','historique','history']],
+    nFr:'Score = affinité dépendances (vivantes ou inter-PI) + cohésion plateforme, sous contrainte de plafond. Bac « Non placés ».', nEn:'Score = dependency affinity (live or cross-PI) + platform cohesion, under the cap constraint. "Unseated" tray.' },
+  s09c:    { code:'S-09 · Aperçu', codeEn:'S-09 · Preview', path:'/s09?tab=apercu', file:'S09ApercuTab.tsx', arch:'map', flags:'⚡',
+    tFr:'Aperçu & publication du plan', tEn:'Plan preview & publish', tables:['venue_zones','venue_tables'],
+    b:[['Publier aux participants','Publish to participants','Realtime + notification']],
+    nFr:'Cycle Brouillon → Enregistré → Publié. Réutilisé tel quel par S-09b.', nEn:'Draft → Saved → Published cycle. Reused as-is by S-09b.' },
+  s09v:    { code:'S-09b', path:'/s09b', file:'S09bPlanDeSalleVue.tsx', arch:'map', flags:'⚡',
+    tFr:'Plan de salle (vue participant)', tEn:'Venue plan (participant view)', tables:['venue_tables','venue_table_assignments'],
+    b:[],
+    nFr:'Plein écran, lecture seule. Visible depuis la tuile hub si venue_plan_status = published (phases Avant/Après).', nEn:'Full screen, read only. Shown from the hub tile when venue_plan_status = published (Before/After phases).' },
+  pdrawer: { code:'ProfileDrawer', path:'PIPTopbar', file:'ProfileDrawer.tsx', arch:'mobile', flags:'',
+    tFr:'Badge & QR de check-in', tEn:'Badge & check-in QR', tables:['participants','participant_team_roles','venue_table_assignments'],
+    b:[['Retour au hub','Back to hub','/s-home-pi']],
+    nFr:'Ex-S-25. Identité, plateforme, QR / horodatage de check-in, mes équipes avec « Table X · Zone Y » si le plan est publié.', nEn:'Ex-S-25. Identity, platform, check-in QR / timestamp, my teams with "Table X · Zone Y" when the plan is published.' },
+  s10:     { code:'S-10', path:'/s10', file:'S10Checkin.tsx', arch:'tiles', flags:'⚡',
+    tFr:'Check-in accueil', tEn:'Welcome desk check-in', tables:['participants'],
+    b:[['Scanner un QR code','Scan a QR code','QRScanModal'],['Enregistrement alternatif','Alternative check-in','AltRegModal'],['Retour','Back','—']],
+    nFr:'Sidebar 272px (quorum, jauges plateforme, absents critiques) + chart d’arrivées 15 min dérivé des vrais check_in_at. Polling 15 s.', nEn:'272px sidebar (quorum, platform gauges, critical absentees) + 15-min arrivals chart derived from real check_in_at. 15s polling.' },
+  qr:      { code:'QRScanModal', path:'/s10', file:'QRScanModal.tsx', arch:'sys', flags:'⚡',
+    tFr:'Scan caméra', tEn:'Camera scan', tables:['participants'],
+    b:[['Scanner le suivant','Scan next','reprise auto 1,8 s','auto resume 1.8s']],
+    nFr:'Le QR encode accordance:checkin:{participantId}, jamais une URL. Caméra indisponible → repli recherche manuelle.', nEn:'The QR encodes accordance:checkin:{participantId}, never a URL. Camera unavailable → manual search fallback.' },
+  s11op:   { code:'S-11 · Opérationnel', codeEn:'S-11 · Operational', path:'/s11', file:'S11Dashboard.tsx', arch:'tiles', flags:'⚡',
+    tFr:'Dashboard opérationnel', tEn:'Operational dashboard', tables:['participants','objectives','dependencies','risks','votes'],
+    b:[['Arrivées','Arrivals','/s10'],['Objectifs','Objectives','/s27'],['Dépendances','Dependencies','/s15'],['Risques','Risks','/s13'],['Vote','Vote','/s46'],['Planning board →','Planning board →','/s17']],
+    nFr:'MetricTiles cliquables + timer de session + liste des équipes filtrable. Clic sur une ligne équipe → /s27?team=CODE.', nEn:'Clickable MetricTiles + session timer + filterable team list. Clicking a team row → /s27?team=CODE.' },
+  s11pi:   { code:'S-11 · Pilotage', codeEn:'S-11 · Steering', path:'/s11', file:'S11Dashboard.tsx', arch:'grid', flags:'⚡',
+    tFr:'Cockpit décideur', tEn:'Decision-maker cockpit', tables:['objectives','risks','dependencies','votes'],
+    b:[['Voir →','See →','/s15 · /s46 · /s41'],['Contester','Challenge','drawer + invalide la soumission','drawer + invalidates submission','p3']],
+    nFr:'P3 atterrit ici sans toggle. KPI portefeuille, scorecard triable (score composite), drill-down équipe, TeamSwitcher scopé currentTeams.', nEn:'P3 lands here with no toggle. Portfolio KPIs, sortable scorecard (composite score), per-team drill-down, TeamSwitcher scoped to currentTeams.' },
+  s13:     { code:'S-13', path:'/s13', file:'S13Roam.tsx', arch:'kanban', flags:'',
+    tFr:'ROAM Board', tEn:'ROAM Board', tables:['risks'],
+    b:[['Board / Liste','Board / List','toggle','toggle'],['Arbitrer','Arbitrate','ArbitrationModal','ArbitrationModal','p3']],
+    nFr:'5 colonnes Resolved/Owned/Accepted/Mitigated/Unclassified, drag & drop réservé P1. Vue Liste : ROAM summary cliquable + chips plateforme/impact/équipe.', nEn:'5 columns Resolved/Owned/Accepted/Mitigated/Unclassified, drag & drop for P1 only. List view: clickable ROAM summary + platform/impact/team chips.' },
+  s15:     { code:'S-15', path:'/s15', file:'S15Dependencies.tsx', arch:'matrix', flags:'⚡',
+    tFr:'Dépendances inter-équipes', tEn:'Cross-team dependencies', tables:['dependencies'],
+    b:[['Soumettre à arbitrage','Submit for arbitration','needs_arbitration','needs_arbitration','po,mb,p1,p2'],['Arbitrer','Arbitrate','decision_notes + arbitrated_by','decision_notes + arbitrated_by','p3']],
+    nFr:'Matrice inter-équipes + 4 compteurs + liste filtrable. Flags orthogonaux is_blocked / needs_arbitration. Filtré currentTeams pour P3/P4.', nEn:'Cross-team matrix + 4 counters + filterable list. Orthogonal is_blocked / needs_arbitration flags. Filtered by currentTeams for P3/P4.' },
+  s26:     { code:'S-26', path:'/s26', file:'S26AgendaLive.tsx', arch:'agenda', flags:'⚡',
+    tFr:'Agenda en direct', tEn:'Live agenda', tables:['agenda_sessions','meetings','meeting_invitees'],
+    b:[['Prendre un RDV','Book a meeting','MeetingCreateDrawer'],['Créer le RDV','Create the meeting','meetings + invitations']],
+    nFr:'Timeline unifiée sessions + RDV, un seul flux. Créneau chargé = dilaté (badge « Dilaté »), plages vides compressées. Palier carte (1-6 RDV) ou pastille (7+). Lecture seule : le Hub reste le point d’action.', nEn:'Unified sessions + meetings timeline, one single flow. A busy slot expands ("Expanded" badge), empty ranges compress. Card tier (1-6 meetings) or dot tier (7+). Read only: the hub stays the action point.' },
+  mdraw:   { code:'MeetingDetailDrawer', path:'/s26 · /s27', file:'MeetingDetailDrawer.tsx', arch:'list', flags:'⚡',
+    tFr:'Détail du RDV', tEn:'Meeting details', tables:['meetings','meeting_invitees','meeting_rooms'],
+    b:[['Annuler le RDV','Cancel meeting','notifie les invités','notifies invitees'],['Où trouver cette salle','Where to find this room','zone du plan','plan zone']],
+    nFr:'Accepter / refuser / proposer un changement. « Où trouver cette salle » si la salle du RDV correspond à une zone du plan.', nEn:'Accept / decline / propose a change. "Where to find this room" when the meeting room maps to a plan zone.' },
+  s27o:    { code:'S-27 · Objectifs', codeEn:'S-27 · Objectives', path:'/s27?tab=objectifs', file:'S27Breakout.tsx', arch:'list', flags:'⚡',
+    tFr:'Objectifs de l’équipe', tEn:'Team objectives', tables:['objectives'],
+    b:[['Ajouter un objectif','Add an objective','objectives','objectives','po,mb'],['Committed / Uncommitted','Committed / Uncommitted','objectives.status','objectives.status','po,mb'],['Soumettre le plan','Submit the plan','verrouille les objectifs','locks the objectives','po'],['Soumettre notre plan','Submit our plan','vue mobile','mobile view','po'],['Soumettre','Submit','ConfirmDialog','ConfirmDialog','po'],['Mode édition','Edit mode','déverrouille la saisie','unlocks editing','p1']],
+    nFr:'Liste triable (DnD), toggle Committed/Uncommitted, sprints, taille T-shirt, bloc Capacité PI (chip OK/Tendu/Dépassement). Soumission réservée PO/PTL. Seul repli mobile du produit : viewport ≤768px → S27MobileView.', nEn:'Sortable list (DnD), Committed/Uncommitted toggle, sprints, T-shirt size, PI capacity block (OK/Tight/Over chip). Submission reserved for PO/PTL. The product\u2019s only mobile fallback: viewport ≤768px → S27MobileView.' },
+  s27r:    { code:'S-27 · Risques', codeEn:'S-27 · Risks', path:'/s27?tab=risques', file:'S27Breakout.tsx', arch:'list', flags:'⚡',
+    tFr:'Risques de l’équipe', tEn:'Team risks', tables:['risks'],
+    b:[['Enregistrer','Save','risks']],
+    nFr:'Saisie ROAM scopée équipe (titre, description, impact, statut R/O/A/M, lien objectif). S-13 est la vue board transverse des mêmes données.', nEn:'Team-scoped ROAM entry (title, description, impact, R/O/A/M status, objective link). S-13 is the cross-team board on the same data.' },
+  s27d:    { code:'S-27 · Dépendances', codeEn:'S-27 · Dependencies', path:'/s27?tab=dependances', file:'S27Breakout.tsx', arch:'list', flags:'⚡',
+    tFr:'Dépendances & RDV de l’équipe', tEn:'Team dependencies & meetings', tables:['dependencies','meetings'],
+    b:[['Accepter','Accept','status v2'],['Bloquer','Block','is_blocked'],['Prendre un RDV','Book a meeting','MeetingCreateDrawer']],
+    nFr:'Demandes sortantes éditables · demandes entrantes (Accepter / Bloquer / Marquer résolue) · carte RDVs inter-équipes. Badge si demandes entrantes ouvertes.', nEn:'Editable outgoing requests · incoming requests (Accept / Block / Mark resolved) · cross-team meetings card. Badge when incoming requests are open.' },
+  s27p:    { code:'S-27 · Planning board', path:'/s27?tab=roadmap', file:'S27Breakout.tsx', arch:'grid', flags:'⚡',
+    tFr:'Planning board de l’équipe', tEn:'Team planning board', tables:['objectives','sprints'],
+    b:[],
+    nFr:'Vue agrégée lecture seule : objectifs sur les sprints de l’équipe, badges risques, chips dépendances. Sprints dérivés à l’affichage (computeTeamSprints).', nEn:'Read-only aggregated view: objectives across the team sprints, risk badges, dependency chips. Sprints derived at render time (computeTeamSprints).' },
+  s27b:    { code:'S-27b', path:'/s27b', file:'S27bPresentation.tsx', arch:'present', flags:'',
+    tFr:'Présentation plénière', tEn:'Plenary presentation', tables:['objectives','risks','dependencies','votes'],
+    b:[['Je présente pour mon équipe','Present for my team','télécommande','remote','po,mb,p3'],['Commencer ce lot →','Start this batch →','étapes','steps'],['Présenter · {{teams}} · {{lots}} →','Present · {{teams}} · {{lots}} →','mode salle','room mode','p1,p2'],['Aller au feedback','Go to feedback','/s41'],['← Retour','← Back','/s27']],
+    nFr:'Canevas virtuel 1920×1080 mis à l’échelle, mode salle (projection) / écran (laptop, visio). Parcours : Identité → Engagés ×8 → Non engagés → Reportés → Deps & risques → Vote. Télécommande « last claim wins », retirable par P1/P2.', nEn:'Scaled 1920×1080 virtual canvas, room mode (projection) / screen mode (laptop, video call). Flow: Identity → Committed ×8 → Uncommitted → Deferred → Deps & risks → Vote. "Last claim wins" remote, revocable by P1/P2.' },
+  s46:     { code:'S-46', path:'/s46', file:'S46Vote.tsx', arch:'vote', flags:'',
+    tFr:'Vote de confiance', tEn:'Confidence vote', tables:['votes','pi_plannings'],
+    b:[['Ouvrir le vote','Open the vote','vote_open = true','vote_open = true','p1,p2'],['Fermer le vote','Close the vote','vote_open = false','vote_open = false','p1,p2'],['Envoyer mon vote','Submit my vote','votes','votes','po,mb'],['Retour à l’accueil','Back to home','/s-home-pi','/s-home-pi','po,mb']],
+    nFr:'Dispatch par profil : P1/P2 synthèse pilotage + ouverture/fermeture · P3 supervision de ses équipes en lecture (ne vote pas) · P4 vote 1-5 puis enchaînement vers l’équipe suivante. S-28 absorbé ici (2026-07-04).', nEn:'Dispatched by profile: P1/P2 steering summary + open/close · P3 read-only supervision of their teams (does not vote) · P4 votes 1-5 then chains to the next team. S-28 absorbed here (2026-07-04).' },
+  s38:     { code:'S-38', path:'/s38', file:'S38MobileNotifications.tsx', arch:'mobile', flags:'⚡',
+    tFr:'Notifications', tEn:'Notifications', tables:['notifications'],
+    b:[['Nouvelle annonce','New announcement','AnnouncementComposer','AnnouncementComposer','p1,p2']],
+    nFr:'Dispatch par profil : P1/P2 « Annonces envoyées » (liste groupée + compteur lu) · P3/P4 centre de notifications personnelles.', nEn:'Dispatched by profile: P1/P2 "Sent announcements" (grouped list + read counter) · P3/P4 personal notification centre.' },
+  s43:     { code:'S-43', path:'/s43', file:'S43BilanPrecedent.tsx', arch:'list', flags:'',
+    tFr:'Bilan PI précédent', tEn:'Previous PI review', tables:['objectives'],
+    b:[['Atteint','Achieved','post_status'],['En cours','In progress','post_status'],['Non atteint','Missed','post_status'],['Abandonné','Dropped','post_status']],
+    nFr:'Découvert via la tuile hub « Bilan PI précédent — X à qualifier ». Habilitation : PO/PTL de l’équipe en N-1 ou de l’équipe de même code en N. Sauvegarde immédiate, toujours modifiable.', nEn:'Discovered via the hub tile "Previous PI review — X to qualify". Permission: PO/PTL of the team in N-1 or of the same-code team in N. Immediate save, always editable.' },
+  s17r:    { code:'S-17 · Roadmap', path:'/s17', file:'S17Roadmap.tsx', arch:'grid', flags:'',
+    tFr:'Roadmap semaines × équipes', tEn:'Weeks × teams roadmap', tables:['objectives','dependencies','risks'],
+    b:[['Planning board →','Planning board →','/s17'],['Voir dans S15 →','See in S15 →','/s15']],
+    nFr:'SprintGrid en weekMode, toggle Tous/Plateforme/Équipe, ROAM strip, flèches de dépendances, panneau de détail. Bandeau « Données provisoires » si status ≠ archived.', nEn:'SprintGrid in weekMode, All/Platform/Team toggle, ROAM strip, dependency arrows, detail panel. "Provisional data" banner when status ≠ archived.' },
+  s17o:    { code:'S-17 · Objectifs', codeEn:'S-17 · Objectives', path:'/s17', file:'S17Roadmap.tsx', arch:'list', flags:'',
+    tFr:'Objectifs par post_status', tEn:'Objectives by post_status', tables:['objectives'],
+    b:[], nFr:'Liste filtrée par post_status, alimentée par S-43.', nEn:'List filtered by post_status, fed by S-43.' },
+  s17k:    { code:'S-17 · Risques', codeEn:'S-17 · Risks', path:'/s17', file:'S17Roadmap.tsx', arch:'matrix', flags:'',
+    tFr:'Matrice ROAM du bilan', tEn:'Review ROAM matrix', tables:['risks'],
+    b:[], nFr:'Matrice ROAM filtrée — S-18 absorbé ici.', nEn:'Filtered ROAM matrix — S-18 absorbed here.' },
+  s17t:    { code:'S-17 · Équipes', codeEn:'S-17 · Teams', path:'/s17', file:'S17Roadmap.tsx', arch:'table', flags:'',
+    tFr:'Classement des équipes', tEn:'Team ranking', tables:['votes','objectives'],
+    b:[], nFr:'Classement par score de confiance / taux de réalisation — ex-S-39.', nEn:'Ranked by confidence score / completion rate — ex-S-39.' },
+  s17e:    { code:'S-17 · Export', path:'/s17', file:'S17ExportDrawer.tsx', arch:'sys', flags:'',
+    tFr:'Export du bilan', tEn:'Review export', tables:['objectives','risks','dependencies','votes'],
+    b:[['PDF · Excel · JSON · PPTX','PDF · Excel · JSON · PPTX','téléchargement','download']],
+    nFr:'Drawer dédié — ex-S-30.', nEn:'Dedicated drawer — ex-S-30.' },
+  s40:     { code:'S-40', path:'/s40', file:'S40Analytics.tsx', arch:'grid', flags:'',
+    tFr:'Analytics', tEn:'Analytics', tables:['objectives','votes','dependencies','risks'],
+    b:[['Archiver ce PI','Archive this PI','/s08']],
+    nFr:'Tendances, comparatif PI, performance par plateforme. CTA footer → archivage via le stepper de S-08.', nEn:'Trends, PI comparison, per-platform performance. Footer CTA → archiving via the S-08 stepper.' },
+  s41:     { code:'S-41', path:'/s41', file:'S41FeedbackParticipant.tsx', arch:'mobile', flags:'',
+    tFr:'Feedback de l’événement', tEn:'Event feedback', tables:['feedbacks','pi_plannings'],
+    b:[['Envoyer ma rétro','Send my retro','feedbacks','feedbacks','po,mb,p3'],['Ouvrir / Fermer','Open / Close','feedback_open','feedback_open','p1,p2']],
+    nFr:'Rétro de l’événement, pas de l’incrément : 6 dimensions notées 1-5 + 3 champs libres. Deux vues : participant (saisie/modification/suppression) · admin P1/P2 (stats, verbatims).', nEn:'Retro of the event, not the increment: 6 dimensions rated 1-5 + 3 free-text fields. Two views: participant (create/edit/delete) · P1/P2 admin (stats, verbatims).' },
+  states:  { code:'States', path:'/states', file:'SystemStates.tsx', arch:'sys', flags:'',
+    tFr:'États système & tokens', tEn:'System states & tokens', tables:[],
+    b:[], nFr:'Écran de référence dev : design tokens et composants partagés.', nEn:'Dev reference screen: design tokens and shared components.' },
+  brevo:   { code:'Edge', path:'send-registration-emails', file:'supabase/functions', arch:'sys', flags:'',
+    tFr:'Emails vœux (Brevo)', tEn:'Application emails (Brevo)', tables:['registrations'],
+    b:[['invite','invite','lien /s20?token=','/s20?token= link'],['accepted','accepted','magic link'],['rejected','rejected','—']],
+    nFr:'Edge function unique — trois gabarits. Déclenchée par l’ouverture de la période et par les décisions de S-19.', nEn:'Single edge function — three templates. Triggered by opening the window and by S-19 decisions.' },
+  magic:   { code:'Auth', path:'Supabase Auth', file:'AuthContext.tsx', arch:'sys', flags:'',
+    tFr:'Magic link + OTP', tEn:'Magic link + OTP', tables:['auth.users'],
+    b:[['Magic link','Magic link','/login']],
+    nFr:'shouldCreateUser: false — seul un participant existant peut se connecter. Publier le PI envoie les liens à tous les participants.', nEn:'shouldCreateUser: false — only an existing participant can sign in. Publishing the PI sends the links to every participant.' },
+  rt:      { code:'Realtime', path:'Supabase Realtime', file:'—', arch:'sys', flags:'⚡',
+    tFr:'Diffusion temps réel', tEn:'Realtime broadcast', tables:['notifications','venue_table_assignments','objectives','dependencies','meetings'],
+    b:[], nFr:'Notifications in-app, publication du plan de salle (« ta table a changé »), invalidation de soumission, invitations de RDV, arrivées de check-in.', nEn:'In-app notifications, venue plan publication ("your table changed"), submission invalidation, meeting invitations, check-in arrivals.' },
+  ckin:    { code:'check_in_at', path:'participants', file:'participantsApi.ts', arch:'sys', flags:'⚡',
+    tFr:'Horodatage d’arrivée', tEn:'Arrival timestamp', tables:['participants'],
+    b:[], nFr:'Un seul check_in_at par participant — pas de suivi multi-jours (v2 envisagée : table check_ins). Erreurs Supabase remontées explicitement.', nEn:'One check_in_at per participant — no multi-day tracking (v2 considered: check_ins table). Supabase errors surfaced explicitly.' },
+};
+
+// place: [screenId, lanes, step, right, optional note key]
+const JOURNEYS = [
+  { id:'all', tag:'Vue', gs:['ent','av','av','av','pdt','pdt','pdt','ap'], ws:[1,2,1,1,1,2,3,2], fr:'Vue d’ensemble — les 26 écrans', en:'Overview — all 26 screens',
+    dFr:'Tous les écrans du repo, rangés par phase et par lane. La référence de cadrage.',
+    dEn:'Every screen in the repo, laid out by phase and lane. The framing reference.',
+    steps:[{fr:'Entrée & accueil',en:'Entry & home'},{fr:'Avant · Setup',en:'Before · Setup'},{fr:'Avant · Vœux',en:'Before · Applications'},{fr:'Avant · Plan de salle',en:'Before · Venue plan'},{fr:'Pendant · Check-in',en:'During · Check-in'},{fr:'Pendant · Pilotage',en:'During · Steering'},{fr:'Pendant · Session',en:'During · Session'},{fr:'Après · Bilan',en:'After · Review'}],
+    place:[
+      ['login','p1,p2,p3,po,mb',0,'e'],['pis','p1,p2,p3,po,mb',0,'e'],['hub','p1,p2,p3,po,mb',0,'e'],['magic','sys',0,'x'],
+      ['s01','p1',1,'e'],['s02','p1',1,'e'],['s03','p1',1,'e'],['s04','p1',1,'e'],['s08','p1',1,'e'],
+      ['s02','p2',1,'l'],['s03','p2',1,'l'],['s04','p2',1,'l'],['s08','p2',1,'l'],
+      ['s19','p1,p2',2,'e'],['s20','p3,po,mb',2,'e'],['brevo','sys',2,'x'],
+      ['s09a','p1,p2',3,'e'],['s09b','p1,p2',3,'e'],['s09c','p1,p2',3,'e'],['s09v','p3,po,mb',3,'l'],['rt','sys',3,'x'],
+      ['s10','p1,p2',4,'e'],['qr','p1,p2',4,'e'],['pdrawer','p3,po,mb',4,'l'],['ckin','sys',4,'x'],
+      ['s11op','p1,p2',5,'e'],['s11pi','p3',5,'a'],['s11pi','p1,p2',5,'l'],['s13','p1',5,'e'],['s13','p2',5,'l'],['s13','p3',5,'a'],['s15','p1,p2',5,'e'],['s15','p3',5,'a'],['s15','po,mb',5,'l'],
+      ['s27o','po',6,'s'],['s27o','mb',6,'e'],['s27r','mb,po',6,'e'],['s27d','mb,po',6,'e'],['s27p','mb,po',6,'l'],['s27o','p1',6,'e'],['s27o','p3',6,'l'],
+      ['s26','p2,p3,po,mb',6,'l'],['mdraw','po,mb,p3',6,'e'],['s46','p1,p2',6,'e'],['s46','po,mb',6,'e'],['s46','p3',6,'l'],['s27b','p1,p2',6,'e'],['s27b','po,mb',6,'e'],['s38','p1,p2',6,'e'],['s38','p3,po,mb',6,'l'],
+      ['s43','po',7,'e'],['s43','p1',7,'e'],['s17r','p1,p2',7,'e'],['s17r','p3,po,mb',7,'l'],['s17o','p1,p2,p3',7,'l'],['s17k','p1,p2,p3',7,'l'],['s17t','p1,p2,p3',7,'l'],['s17e','p1,p2',7,'e'],['s40','p1,p2',7,'l'],['s41','p1,p2',7,'e'],['s41','p3,po,mb',7,'e'],['states','p1',7,'l'],
+    ]},
+  { id:'j1', tag:'P1', gs:['av','av','av','av','av','av','av','av','av','pdt'], ws:[1,1,2,1,1,1,1,2,2,2], fr:'Configurer, placer et publier un PI', en:'Configure, seat and publish a PI',
+    dFr:'De la création du PI au jour J, plan de salle inclus : huit surfaces de préparation, une checklist bloquante, deux bascules de statut. Publier le PI publie aussi le plan de salle s’il est enregistré.',
+    dEn:'From PI creation to D-day, venue plan included: eight preparation surfaces, one blocking checklist, two status switches. Publishing the PI also publishes the venue plan when it is saved.',
+    steps:[{fr:'Identité & lieu',en:'Identity & venue'},{fr:'Équipes & cadence',en:'Teams & cadence'},{fr:'Vœux',en:'Applications'},{fr:'Participants',en:'Participants'},{fr:'Agenda & salles',en:'Agenda & rooms'},{fr:'Zones & tables',en:'Zones & tables'},{fr:'Générateur de placement',en:'Seating generator'},{fr:'Checklist & publication',en:'Checklist & publish'},{fr:'Magic links & plan publié',en:'Magic links & plan published'},{fr:'Démarrer · active',en:'Start · active'}],
+    place:[
+      ['s01','p1',0,'e'],['s02','p1',1,'e'],['s19','p1,p2',2,'e'],['brevo','sys',2,'x'],
+      ['s03','p1',3,'e'],['s04','p1',4,'e'],
+      ['s09a','p1,p2',5,'e'],['s09b','p1,p2',6,'e'],
+      ['s08','p1',7,'e'],['s09c','p1,p2',7,'e'],
+      ['magic','sys',8,'x'],['rt','sys',8,'x'],['pis','p2,p3,po,mb',8,'l'],['s38','p3,po,mb',8,'l'],
+      ['s11op','p1',9,'e'],['hub','p2,p3,po,mb',9,'l'],['s09v','p3,po,mb',9,'l'],['pdrawer','p3,po,mb',9,'l'],
+    ]},
+  { id:'j2', tag:'P2', gs:['av','av','av','av','av','av','av','av'], ws:[2,1,1,2,1,1,1,1], fr:'Candidature → intégration participant', en:'Application → participant onboarding',
+    dFr:'Le seul parcours qui commence hors authentification : un token dans un email Brevo, et il finit dans le Hub.',
+    dEn:'The only journey that starts outside authentication: a token in a Brevo email, ending in the hub.',
+    steps:[{fr:'Ouverture de la période',en:'Open the window'},{fr:'Email d’invitation',en:'Invitation email'},{fr:'Formulaire de vœu',en:'Application form'},{fr:'Candidatures & décision',en:'Applications & decision'},{fr:'Magic link',en:'Magic link'},{fr:'Connexion',en:'Sign-in'},{fr:'Liste des PIs',en:'PI list'},{fr:'Hub PI',en:'PI hub'}],
+    place:[
+      ['s19','p1,p2',0,'e'],['brevo','sys',1,'x'],['s20','p3,po,mb',2,'e'],
+      ['s19','p1,p2',3,'e'],['s03','p1',3,'e'],['magic','sys',4,'x'],
+      ['login','p3,po,mb',5,'e'],['pis','p3,po,mb',6,'l'],['hub','p3,po,mb',7,'l'],
+    ]},
+  { id:'j4', tag:'Jour J', gs:['pdt','pdt','pdt','pdt'], ws:[1,2,1,2], fr:'Arrivée Jour J', en:'D-day arrival',
+    dFr:'Un QR côté participant, un scan côté accueil, un horodatage — et le Hub bascule en phase Pendant.',
+    dEn:'A QR on the participant side, a scan at the desk, a timestamp — and the hub switches to the During phase.',
+    steps:[{fr:'QR du participant',en:'Participant QR'},{fr:'Scan ou recherche',en:'Scan or search'},{fr:'check_in_at posé',en:'check_in_at set'},{fr:'Hub en phase Pendant',en:'Hub in During phase'}],
+    place:[
+      ['pdrawer','p3,po,mb',0,'l'],['s10','p1,p2',1,'e'],['qr','p1,p2',1,'e'],
+      ['ckin','sys',2,'x'],['hub','p3,po,mb',3,'l'],['s11op','p1,p2',3,'l'],
+    ]},
+  { id:'j5', tag:'Breakout', gs:['pdt','pdt','pdt','pdt','pdt','pdt','pdt'], ws:[2,2,1,2,1,2,2], fr:'Breakout équipe → contestation décideur', en:'Team breakout → decision-maker challenge',
+    dFr:'Le cœur du produit : l’équipe produit son plan, le PO/PTL l’engage, le décideur le challenge, la boucle repart.',
+    dEn:'The heart of the product: the team produces its plan, the PO/PTL commits it, the decision maker challenges it, the loop restarts.',
+    steps:[{fr:'Objectifs',en:'Objectives'},{fr:'Risques & dépendances',en:'Risks & dependencies'},{fr:'Soumission PO/PTL',en:'PO/PTL submission'},{fr:'Observation du plan',en:'Plan review'},{fr:'Contestation',en:'Challenge'},{fr:'Équipe notifiée',en:'Team notified'},{fr:'Correction & resoumission',en:'Fix & resubmit'}],
+    place:[
+      ['s27o','mb',0,'e'],['s27o','po',0,'e'],['s27o','p1',0,'e'],['s27o','p3',0,'l'],
+      ['s27r','mb,po',1,'e'],['s27d','mb,po',1,'e'],['s15','p1,p2',1,'e'],
+      ['s27o','po',2,'s'],['s11pi','p1,p2',3,'l'],['s11pi','p3',3,'l'],
+      ['s11pi','p3',4,'a'],['rt','sys',5,'x'],['s38','mb,po',5,'l'],['s27o','po',6,'s'],['s27o','mb',6,'e'],
+    ]},
+  { id:'j6', tag:'Vote', gs:['pdt','pdt','pdt','pdt','pdt'], ws:[1,1,1,2,1], fr:'Vote de confiance', en:'Confidence vote',
+    dFr:'Un seul écran, quatre comportements selon le profil — et un résultat projeté en plénière.',
+    dEn:'One screen, four behaviours by profile — and a result projected in the plenary.',
+    steps:[{fr:'Ouverture du vote',en:'Open the vote'},{fr:'Vote 1-5 par équipe',en:'1-5 vote per team'},{fr:'Supervision décideur',en:'Decision-maker oversight'},{fr:'Synthèse pilotage',en:'Steering summary'},{fr:'Étape Vote en plénière',en:'Vote step in plenary'}],
+    place:[
+      ['s46','p1,p2',0,'e'],['s46','po,mb',1,'e'],['s46','p3',2,'l'],
+      ['s46','p1,p2',3,'l'],['s11op','p1,p2',3,'l'],['s27b','p1,p2',4,'e'],['s27b','po,mb,p3',4,'l'],
+    ]},
+  { id:'j7', tag:'Plénière', gs:['pdt','pdt','pdt','pdt','pdt'], ws:[1,1,2,1,2], fr:'Présentation plénière', en:'Plenary presentation',
+    dFr:'Une télécommande « last claim wins », deux modes de rendu, un parcours d’étapes de longueur variable par équipe.',
+    dEn:'A "last claim wins" remote, two render modes, a variable-length step flow per team.',
+    steps:[{fr:'Lobby',en:'Lobby'},{fr:'Télécommande réclamée',en:'Remote claimed'},{fr:'Parcours d’étapes',en:'Step flow'},{fr:'Équipe suivante',en:'Next team'},{fr:'Sortie',en:'Exit'}],
+    place:[
+      ['s27b','p1,p2',0,'e'],['s27b','po,mb',1,'e'],['s27b','p1,p2,p3,po,mb',2,'l'],
+      ['s27b','p1,p2',3,'e'],['s27b','po,mb',4,'l'],['s41','po,mb,p3',4,'e'],['s27o','po',4,'l'],
+    ]},
+  { id:'j8', tag:'RDV', gs:['pdt','pdt','pdt','pdt','pdt'], ws:[2,1,2,2,2], fr:'RDV inter-équipes', en:'Cross-team meetings',
+    dFr:'Créé depuis deux surfaces, répondu dans un drawer, notifié en temps réel, localisé sur le plan de salle.',
+    dEn:'Created from two surfaces, answered in a drawer, notified in realtime, located on the venue plan.',
+    steps:[{fr:'Créer le RDV',en:'Create the meeting'},{fr:'Invitations envoyées',en:'Invitations sent'},{fr:'Réponse de l’invité',en:'Invitee response'},{fr:'Initiateur notifié',en:'Initiator notified'},{fr:'Où trouver la salle',en:'Where to find the room'}],
+    place:[
+      ['s26','po',0,'e'],['s27d','po',0,'e'],['s26','p3',0,'l'],
+      ['rt','sys',1,'x'],['mdraw','po,mb,p3',2,'e'],['rt','sys',3,'x'],['s38','po,mb,p3',3,'l'],
+      ['mdraw','po,mb,p3',4,'l'],['s09v','po,mb,p3',4,'l'],
+    ]},
+  { id:'j9', tag:'N-1', gs:['av','av','av','ap','ap'], ws:[1,1,2,2,1], fr:'Bilan du PI précédent', en:'Previous PI review',
+    dFr:'Le seul lien entre deux PI : le PO/PTL qualifie le post_status de N-1 dès que N est publié.',
+    dEn:'The only link between two PIs: the PO/PTL qualifies the N-1 post_status as soon as N is published.',
+    steps:[{fr:'PI N publié',en:'PI N published'},{fr:'Tuile hub',en:'Hub tile'},{fr:'Qualification post_status',en:'post_status qualification'},{fr:'Alimente le bilan',en:'Feeds the review'},{fr:'Analytics',en:'Analytics'}],
+    place:[
+      ['s08','p1',0,'e'],['hub','po',1,'l'],['s43','po',2,'e'],['s43','p1',2,'e'],
+      ['s17o','p1,p2,p3',3,'l'],['s11pi','p3',3,'l'],['s40','p1,p2',4,'l'],
+    ]},
+  { id:'j10', tag:'Rétro', gs:['ap','ap','ap'], ws:[1,2,2], fr:'Feedback de l’événement', en:'Event feedback',
+    dFr:'Rétro de l’événement de planning, pas de l’incrément : six dimensions, trois champs libres, une synthèse.',
+    dEn:'Retro of the planning event, not the increment: six dimensions, three free-text fields, one summary.',
+    steps:[{fr:'Ouverture du feedback',en:'Open the feedback'},{fr:'Rétro participant',en:'Participant retro'},{fr:'Synthèse & verbatims',en:'Summary & verbatims'}],
+    place:[
+      ['s41','p1,p2',0,'e'],['s41','po,mb,p3',1,'e'],['s41','p1,p2',2,'l'],
+    ]},
+];
+
+class Component extends DCLogic {
+  state = { lang:'fr', jid:'all', zoom:1, all:false, hover:null, sel:null, lib:false, shots:{} };
+
+  componentDidMount() {
+    this.loadShots();
+    this._onFocus = () => this.loadShots();
+    window.addEventListener('focus', this._onFocus);
+    this.drawArrows();
+  }
+  componentWillUnmount() { window.removeEventListener('focus', this._onFocus); }
+  componentDidUpdate() { this.drawArrows(); }
+
+  loadShots() {
+    fetch('.image-slots.state.json', { cache:'no-store' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => { if (j && typeof j === 'object') this.setState({ shots: j }); })
+      .catch(() => {});
+  }
+
+  shotFor(id) {
+    const v = this.state.shots['shot-' + id];
+    if (!v) return null;
+    const u = typeof v === 'string' ? v : v.u;
+    return u && u.indexOf('data:image/') === 0 ? u : null;
+  }
+
+  drawArrows() {
+    const z = this.state.zoom || 1;
+    document.querySelectorAll('[data-grid]').forEach(grid => {
+      const svg = grid.querySelector('[data-arrows]');
+      if (!svg) return;
+      const W = grid.scrollWidth, H = grid.scrollHeight;
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.setAttribute('width', W); svg.setAttribute('height', H);
+      const gr = grid.getBoundingClientRect();
+      const box = el => {
+        const r = el.getBoundingClientRect();
+        return { x:(r.left - gr.left)/z, y:(r.top - gr.top)/z, w:r.width/z, h:r.height/z };
+      };
+      const active = grid.querySelectorAll('[data-card][data-active="1"]');
+      if (!active.length) { svg.innerHTML = ''; return; }
+      const targets = Array.prototype.slice.call(grid.querySelectorAll('[data-card]'));
+      let d = '';
+      active.forEach(src => {
+        const sb = box(src);
+        src.querySelectorAll('[data-dest]').forEach(bt => {
+          const route = bt.getAttribute('data-dest');
+          if (!route) return;
+          const bb = box(bt);
+          let best = null, bd = Infinity;
+          targets.forEach(tg => {
+            if (tg === src) return;
+            if ((tg.getAttribute('data-path') || '') !== route) return;
+            const tb = box(tg);
+            const dist = Math.abs(tb.x - sb.x) + Math.abs(tb.y - sb.y) * 0.6;
+            if (dist < bd) { bd = dist; best = tb; }
+          });
+          if (!best) return;
+          const x1 = sb.x + sb.w, y1 = bb.y + bb.h / 2;
+          const fwd = best.x >= x1 - 4;
+          const x2 = fwd ? best.x : best.x + best.w;
+          const y2 = best.y + 16;
+          const c = fwd ? 44 : -44;
+          d += '<path d="M ' + x1 + ' ' + y1 + ' C ' + (x1 + c) + ' ' + y1 + ', ' + (x2 - c) + ' ' + y2 + ', ' + x2 + ' ' + y2 +
+               '" fill="none" stroke="#006EF9" stroke-width="1.4" stroke-opacity="0.9" marker-end="url(#ah)"' +
+               (fwd ? '' : ' stroke-dasharray="4 3"') + ' />';
+        });
+      });
+      svg.innerHTML =
+        '<defs><marker id="ah" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">' +
+        '<path d="M 0 1 L 7 4 L 0 7 z" fill="#006EF9" /></marker></defs>' + d;
+    });
+  }
+
+  L(o, a, b) { return this.state.lang === 'fr' ? o[a] : o[b]; }
+
+  renderVals() {
+    const fr = this.state.lang === 'fr';
+    const t = (f, e) => (fr ? f : e);
+    const L = (o, a, b) => (fr ? o[a] : o[b]);
+
+    const chipCss = (on) =>
+      'font:inherit;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;cursor:pointer;white-space:nowrap;' +
+      (on
+        ? 'background:rgba(0,0,0,0.88);color:#FFF;border:1px solid rgba(0,0,0,0.88)'
+        : 'background:#FFF;color:rgba(0,0,0,0.60);border:1px solid #D9D9D9');
+
+    const chips = JOURNEYS.map(j => ({
+      n: L(j, 'fr', 'en'),
+      count: String(new Set(j.place.map(p => p[0])).size),
+      css: chipCss(this.state.jid === j.id && !this.state.all),
+      pick: () => this.setState({ jid: j.id, all: false, sel: null, hover: null }),
+    }));
+
+    const btnCss = (kind) => {
+      const base = "font-family:'SF Mono',SFMono-Regular,Consolas,monospace;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:600;line-height:1.45;display:inline-block;";
+      if (kind === 0) return base + 'background:rgba(0,0,0,0.88);color:#FFF;border:0.5px solid rgba(0,0,0,0.88)';
+      return base + 'background:#F5F5F5;color:rgba(0,0,0,0.88);border:0.5px solid #D9D9D9';
+    };
+    const mkBtns = (sc, max, lane) => (sc.b || [])
+      .filter(b => !lane || !b[4] || b[4].split(',').indexOf(lane) >= 0)
+      .slice(0, max)
+      .map((b, i) => {
+        const d = fr ? b[2] : (b[3] || b[2]);
+        const route = b[2].charAt(0) === '/' ? b[2].split('?')[0].split(' ')[0] : '';
+        return { l: fr ? b[0] : b[1], d, route, dc: d.charAt(0) === '/' ? '#0055CC' : 'rgba(0,0,0,0.45)', css: btnCss(i) };
+      });
+
+    const rowsFor = (arch) => (ARCH[arch] || ARCH.list).map(row => row.map(bk => ({
+      css: 'flex:' + bk[0] + ';height:' + bk[1] + 'px;border-radius:2px;' +
+        (bk[2] === 4 ? 'background:#FFF;border:1px solid #D9D9D9' : 'background:' + T[bk[2]]),
+    })));
+
+    const jlist = this.state.all ? JOURNEYS : JOURNEYS.filter(j => j.id === this.state.jid);
+    const hv = this.state.hover;
+
+    const blocks = jlist.map(j => {
+      const byLane = {};
+      LANES.forEach(ln => { byLane[ln.id] = j.steps.map(() => []); });
+      j.place.forEach(p => {
+        const sc = S[p[0]];
+        if (!sc) return;
+        p[1].split(',').forEach(lid => {
+          if (!byLane[lid]) return;
+          const r = RIGHTS[p[3]] || RIGHTS.l;
+          const active = !hv || hv === p[0] || this.state.sel === p[0];
+          const shot = this.shotFor(p[0]);
+          const w = (j.ws && j.ws[p[2]]) || 1;
+          byLane[lid][p[2]].push({
+            act: (hv === p[0] || this.state.sel === p[0]) ? '1' : '0',
+            route: sc.path.split('?')[0].split(' ')[0],
+            hasShot: !!shot, noShot: !shot,
+            shotCss: shot ? 'height:86px;border:1px solid #F0F0F0;border-radius:4px;background-repeat:no-repeat;background-size:cover;background-position:top left;background-image:url(' + shot + ')' : 'display:none',
+            code: fr ? sc.code : (sc.codeEn || sc.code),
+            title: L(sc, 'tFr', 'tEn'),
+            flags: sc.flags,
+            rLabel: L(r, 'fr', 'en'), rBg: r.bg, rFg: r.c,
+            codeBg: '#F5F5F5', codeFg: 'rgba(0,0,0,0.88)',
+            rows: rowsFor(sc.arch),
+            btns: mkBtns(sc, 3, lid),
+            hasNote: false, note: '',
+            css: 'display:flex;flex-direction:column;gap:5px;padding:9px;border-radius:8px;cursor:pointer;background:#FFF;' +
+              'width:' + (w > 1 ? 'calc((100% - ' + (w - 1) * 8 + 'px)/' + w + ')' : '100%') + ';' +
+              'border:1px solid ' + (hv === p[0] ? '#006EF9' : '#D9D9D9') + ';' +
+              'box-shadow:' + (hv === p[0] ? '0 4px 12px rgba(0,0,0,0.08)' : '0 1px 2px rgba(0,0,0,0.04)') + ';' +
+              'opacity:' + (active ? 1 : 0.28) + ';transition:opacity .12s,border-color .12s',
+            open: () => this.setState({ sel: p[0] }),
+            hoverOn: () => this.setState({ hover: p[0] }),
+            hoverOff: () => this.setState({ hover: null }),
+          });
+        });
+      });
+      const used = LANES.filter(ln => byLane[ln.id].some(c => c.length));
+      return {
+        tag: j.tag,
+        name: L(j, 'fr', 'en'),
+        desc: L(j, 'dFr', 'dEn'),
+        laneHead: t('Persona · rôle', 'Persona · role'),
+        zoomCss: 'position:relative;display:inline-block;min-width:100%;transform:scale(' + this.state.zoom + ');transform-origin:top left',
+        steps: j.steps.map((s, i) => ({
+          n: String(i + 1).padStart(2, '0'), label: L(s, 'fr', 'en'),
+          px: ((j.ws && j.ws[i]) || 1) * COLW,
+        })),
+        groups: (function () {
+          const out = [];
+          j.steps.forEach((s, i) => {
+            const k = (j.gs && j.gs[i]) || 'pdt';
+            const w = ((j.ws && j.ws[i]) || 1) * COLW;
+            const last = out[out.length - 1];
+            if (last && last.k === k) last.px += w;
+            else out.push({ k, px: w, label: L(GROUPS[k], 'fr', 'en'), color: GROUPS[k].color });
+          });
+          return out;
+        })(),
+        lanes: used.map(ln => ({
+          label: L(ln, 'fr', 'en'),
+          short: L(ln, 'shortFr', 'shortEn'),
+          color: ln.color,
+          rowBg: ln.id === 'sys' ? '#FAFAFA' : '#FFF',
+          stickyBg: ln.bg,
+          cells: byLane[ln.id].map((cards, i) => ({ cards, px: ((j.ws && j.ws[i]) || 1) * COLW })),
+        })),
+      };
+    });
+
+    // detail panel
+    let sel = null;
+    const sid = this.state.sel;
+    if (sid && S[sid]) {
+      const sc = S[sid];
+      const rmap = {};
+      JOURNEYS.forEach(j => j.place.forEach(p => {
+        if (p[0] !== sid) return;
+        p[1].split(',').forEach(lid => {
+          const cur = rmap[lid];
+          const rank = { e: 4, s: 5, a: 3, l: 1, x: 2 };
+          if (!cur || rank[p[3]] > rank[cur]) rmap[lid] = p[3];
+        });
+      }));
+      sel = {
+        code: fr ? sc.code : (sc.codeEn || sc.code), path: sc.path, title: L(sc, 'tFr', 'tEn'), file: sc.file,
+        tRights: t('Droits par persona', 'Rights by persona'),
+        tBtns: t('Boutons & destinations', 'Buttons & destinations'),
+        tTables: t('Tables Supabase', 'Supabase tables'),
+        tJourneys: t('Apparaît dans ces parcours', 'Appears in these journeys'),
+        tNotes: t('Comportement dans le code', 'Behaviour in the code'),
+        rights: LANES.filter(ln => rmap[ln.id]).map(ln => {
+          const r = RIGHTS[rmap[ln.id]];
+          return { lane: L(ln, 'fr', 'en'), color: ln.color, l: L(r, 'fr', 'en'), c: r.c, bg: r.bg };
+        }),
+        btns: mkBtns(sc, 12),
+        tables: sc.tables,
+        journeys: JOURNEYS.filter(j => j.id !== 'all' && j.place.some(p => p[0] === sid)).map(j => ({
+          tag: j.tag, n: L(j, 'fr', 'en'),
+          pick: () => this.setState({ jid: j.id, all: false, hover: null }),
+        })),
+        hasNotes: !!sc.nFr, notes: L(sc, 'nFr', 'nEn'),
+      };
+    }
+
+    const langBtn = (on) =>
+      'font:inherit;font-size:11px;font-weight:700;padding:4px 11px;border:0;cursor:pointer;' +
+      (on ? 'background:rgba(0,0,0,0.88);color:#FFF' : 'background:#FFF;color:rgba(0,0,0,0.45)');
+
+    return {
+      crumb: t("L'Oréal R&I · acCordance · cartographie de référence", "L'Oréal R&I · acCordance · reference map"),
+      h1a: t('Carte de flow', 'Flow map'), h1b: t('swimlanes par persona', 'persona swimlanes'),
+      sub: t(
+        "Les 26 écrans du repo — onglets internes compris — rangés en lanes par persona et par rôle d’équipe, le long des dix parcours réels de l’app. Chaque carte porte le libellé exact des boutons, leur destination et le niveau de droits. Tous les écrans sont desktop first — la passe responsive reste à faire. Cliquez une carte pour ses tables Supabase.",
+        "The 26 screens in the repo — internal tabs included — laid out in lanes by persona and team role along the ten real journeys of the app. Each card carries the exact button labels, their destination and the rights level. Every screen is desktop first — the responsive pass is still to come. Click a card for its Supabase tables."),
+      jLabel: t('Parcours', 'Journey'),
+      hint: t('Survol d’un écran = ses occurrences se détachent · clic = panneau de détail', 'Hover a screen to isolate its occurrences · click for the detail panel'),
+      lanes: LANES.map(ln => ({
+        label: L(ln, 'fr', 'en'), color: ln.color,
+        role: L(ln, 'roleFr', 'roleEn'), device: L(ln, 'devFr', 'devEn'),
+      })),
+      rightsLegend: ['e', 's', 'l', 'a', 'x'].map(k => ({
+        l: L(RIGHTS[k], 'fr', 'en'), c: RIGHTS[k].c, bg: RIGHTS[k].bg, d: L(RIGHTS[k], 'dFr', 'dEn'),
+      })),
+      chips, blocks,
+      libTitle: t('Captures d’écran', 'Screenshots'),
+      libSub: t('Déposez une capture par écran — elle remplace le wireframe sur toutes ses cartes. Rechargez la page pour la propager.', 'Drop one capture per screen — it replaces the wireframe on all of its cards. Reload the page to propagate it.'),
+      libOpen: this.state.lib,
+      libBtn: chipCss(this.state.lib) + ';font-size:10.5px;padding:5px 10px',
+      libLabel: this.state.lib ? t('Masquer', 'Hide') : t('Déposer des captures', 'Drop captures'),
+      toggleLib: () => this.setState(s => ({ lib: !s.lib })),
+      shotSlots: Object.keys(S).map(k => ({
+        id: 'shot-' + k,
+        code: fr ? S[k].code : (S[k].codeEn || S[k].code),
+        title: L(S[k], 'tFr', 'tEn'),
+        ph: t('Déposer la capture', 'Drop the capture'),
+      })),
+      hasSel: !!sel, sel: sel || {},
+      close: () => this.setState({ sel: null }),
+      clearHover: () => { if (this.state.hover) this.setState({ hover: null }); },
+      setFR: () => this.setState({ lang: 'fr', hover: null }), setEN: () => this.setState({ lang: 'en', hover: null }),
+      frBtn: langBtn(fr), enBtn: langBtn(!fr),
+      zoomLabel: Math.round(this.state.zoom * 100) + '%',
+      zoomIn: () => this.setState(s => ({ zoom: Math.min(1.6, +(s.zoom + 0.1).toFixed(2)) })),
+      zoomOut: () => this.setState(s => ({ zoom: Math.max(0.5, +(s.zoom - 0.1).toFixed(2)) })),
+      toggleAll: () => this.setState(s => ({ all: !s.all, sel: null, hover: null })),
+      allBtn: chipCss(this.state.all) + ';font-size:10.5px;padding:5px 10px',
+      allLabel: this.state.all ? t('Un parcours', 'Single journey') : t('Tout · impression', 'All · print'),
+      footL: t('Carte de flow v2 · juillet 2026 · dérivée du repo pi-planning-app', 'Flow map v2 · July 2026 · derived from the pi-planning-app repo'),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -412,57 +412,23 @@
   </div>
 </section>
 
-<!-- ══ BLUEPRINT - VISION ÉLARGIE (OPTIONNEL) ═══════════════════ -->
+<!-- ══ VISION ÉLARGIE - CARTE DE FLOW (LIEN EXTERNE) ═══════════════ -->
 <section class="section" id="blueprint">
   <div class="container">
     <div class="section-header">
       <span class="section-eyebrow">Pour aller plus loin</span>
-      <h2 class="section-title">Le blueprint d'un PI Planning</h2>
-      <p class="section-desc">Les 4 parcours superposés, phase par phase - et où acCordance s'articule avec ServiceNow.</p>
+      <h2 class="section-title">La carte de flow détaillée</h2>
+      <p class="section-desc">26 écrans, 10 parcours réels, les 4 profils et leurs droits exacts (édition, soumission, lecture, arbitrage) - un outil de référence à explorer à votre rythme.</p>
     </div>
 
-    <button class="blueprint-toggle" id="blueprintToggle">
-      <span class="label">Déplier le blueprint détaillé</span>
-      <span class="chevron">▾</span>
-    </button>
-
-    <div class="blueprint-content" id="blueprintContent" hidden>
-      <div class="blueprint-scroll">
-        <div class="blueprint-grid">
-          <div class="bp-header bp-corner"></div>
-          <div class="bp-header bp-avant">Avant</div>
-          <div class="bp-header bp-pendant">Pendant</div>
-          <div class="bp-header bp-apres">Après</div>
-
-          <div class="bp-row-label">⚖️ Décideur</div>
-          <div class="bp-cell">Informé de la date - aucune action requise.</div>
-          <div class="bp-cell">Consulte le cockpit, observe sans intervenir, vote en connaissance de cause.</div>
-          <div class="bp-cell">Consulte le bilan agrégé : confiance, risques, dépendances.</div>
-
-          <div class="bp-row-label">🎼 Orchestrateur</div>
-          <div class="bp-cell">Configure le PI, publie, gère les vœux de participation.</div>
-          <div class="bp-cell">Anime la journée, ouvre le vote, supervise risques et dépendances cross-équipes.</div>
-          <div class="bp-cell">Récupère le bilan généré automatiquement.</div>
-
-          <div class="bp-row-label">🎯 PO &amp; PL</div>
-          <div class="bp-cell">Reçoit son vœu, prépare ses objectifs.</div>
-          <div class="bp-cell">Anime le breakout, négocie les dépendances, présente en plénière, soumet les objectifs.</div>
-          <div class="bp-cell">Qualifie la réalisation au PI suivant.</div>
-
-          <div class="bp-row-label">🎵 Membre</div>
-          <div class="bp-cell">Reçoit le magic link, indique son équipe.</div>
-          <div class="bp-cell">Suit l'agenda, contribue aux objectifs et risques, vote.</div>
-          <div class="bp-cell">Retrouve ses objectifs et décisions, à tout moment.</div>
-        </div>
-
-        <div class="servicenow-strip">
-          <div class="sn-label">🔗 ServiceNow</div>
-          <div class="sn-cell">Import CSV des Enhancements/EPICs existants, liés via une référence externe - mapping construit avec l'équipe ServiceNow.</div>
-          <div class="sn-cell">Aucune synchronisation live : acCordance reste l'espace de travail temps réel de l'exercice PI Planning lui-même - une capacité que ServiceNow, orienté suivi des EPICs, ne couvre pas.</div>
-          <div class="sn-cell">Export CSV des objectifs qualifiés vers ServiceNow - notamment au bilan de réalisation N-1.</div>
-        </div>
+    <a href="carte-de-flow.html" class="flowmap-cta">
+      <div class="flowmap-cta-icon">🗺️</div>
+      <div class="flowmap-cta-body">
+        <div class="flowmap-cta-title">Ouvrir la carte de flow</div>
+        <div class="flowmap-cta-desc">Vue interactive : zoom, filtre par parcours, panneau de détail par écran (fichier, route, tables Supabase, droits par profil).</div>
       </div>
-    </div>
+      <div class="flowmap-cta-arrow">→</div>
+    </a>
   </div>
 </section>
 
@@ -516,15 +482,6 @@
       activateTab(btn.dataset.jumpTab);
       document.getElementById('personas').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  });
-
-  // Blueprint dépliable
-  const bpToggle  = document.getElementById('blueprintToggle');
-  const bpContent = document.getElementById('blueprintContent');
-  bpToggle.addEventListener('click', () => {
-    const isOpen = bpToggle.classList.toggle('open');
-    bpContent.hidden = !isOpen;
-    bpToggle.querySelector('.label').textContent = isOpen ? 'Replier le blueprint détaillé' : 'Déplier le blueprint détaillé';
   });
 </script>
 

@@ -901,108 +901,33 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   Blueprint - vue élargie optionnelle (repliée par défaut)
+   Vision élargie - CTA vers la carte de flow (page à part)
    ============================================================ */
-.blueprint-toggle {
+.flowmap-cta {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 16px;
+  gap: 20px;
+  padding: 28px 32px;
   background: var(--bg-elevated);
-  border: 1.5px dashed var(--border);
-  border-radius: var(--radius-lg);
-  color: var(--primary);
-  font-family: inherit;
-  font-size: 14.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: all 0.2s;
 }
-.blueprint-toggle:hover { background: var(--primary-bg); border-color: var(--primary-border); border-style: solid; }
-.blueprint-toggle .chevron { transition: transform 0.2s; display: inline-block; }
-.blueprint-toggle.open .chevron { transform: rotate(180deg); }
-
-.blueprint-content { margin-top: 28px; }
-.blueprint-content[hidden] { display: none; }
-
-.blueprint-scroll { overflow-x: auto; padding-bottom: 6px; }
-
-.blueprint-grid {
-  display: grid;
-  grid-template-columns: 170px repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  margin-bottom: 20px;
-  min-width: 680px;
+.flowmap-cta:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--primary-border);
 }
+.flowmap-cta-icon { font-size: 32px; flex-shrink: 0; }
+.flowmap-cta-body { flex: 1; }
+.flowmap-cta-title { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.flowmap-cta-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+.flowmap-cta-arrow { font-size: 20px; color: var(--primary); flex-shrink: 0; }
 
-.bp-cell {
-  background: var(--bg-elevated);
-  padding: 14px 16px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.bp-header {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.bp-header.bp-avant   { color: var(--purple-8); background: var(--purple-1); }
-.bp-header.bp-pendant { color: var(--primary-text); background: var(--primary-bg); }
-.bp-header.bp-apres   { color: var(--success-text); background: var(--success-bg); }
-.bp-header.bp-corner  { background: var(--bg-subtle); }
-
-.bp-row-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-  background: var(--bg-subtle);
-  padding: 14px 16px;
-}
-
-.servicenow-strip {
-  display: grid;
-  grid-template-columns: 170px repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border-subtle);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  min-width: 680px;
-}
-.sn-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text-tertiary);
-  background: var(--bg-subtle);
-  padding: 14px 16px;
-}
-.sn-cell {
-  background: var(--bg-elevated);
-  padding: 14px 16px;
-  font-size: 12.5px;
-  color: var(--text-tertiary);
-  font-style: italic;
-  line-height: 1.55;
+@media (max-width: 680px) {
+  .flowmap-cta { flex-direction: column; text-align: center; padding: 24px; }
 }
 
 /* ============================================================
